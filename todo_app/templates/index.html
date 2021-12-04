@@ -9,22 +9,42 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h3>Items</h3>
       <ul class="list-group mb-4">
-        {% for item in items%}
-        <li>
-          id: {{item.id}} - Task: {{item.title}} - Status: {{item.status}}
-        </li>
-        {% endfor %}
+        <span class="border border-primary">
+          <table class="table table-striped table-hover table-bordered">
+              <tr class="table-primary">
+                <th>Id</th>
+                <th>Task</th>
+                <th>Status</th>
+              </tr>
+            <tbody>
+              {% for item in items%}
+              <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.status}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </span>
       </ul>
     </div>
   </div>
   <html>
-  <body>
-    <form action="http://localhost:5000/item" method="POST">
-      <p>Add Task <input type="text" placeholder="Enter title" name="title"></p>
-      <p><input type="submit" value="submit"></p>
-    </form>
-  </body>
-</html>
+    <body>
+      <form action="http://localhost:5000/item" method="POST">
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Add task here" name="title">
+          </div>
+          <div class="col">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+    </body>
+  </html>
 {% endblock %}
+
