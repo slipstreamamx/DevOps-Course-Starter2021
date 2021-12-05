@@ -10,10 +10,10 @@
       <h3>Items</h3>
       <ul class="list-group mb-4">
         <span class="border border-primary">
-          <table class="table table-striped table-hover table-bordered">
+          <table class="table table-sm table-striped table-hover table-bordered">
               <tr class="table-primary">
                 <th>Id</th>
-                <th>Task</th>
+                <th>Item</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -24,10 +24,21 @@
                 <td>{{item.title}}</td>
                 <td>{{item.status}}</td>
                 <td>
-                  <form action="http://localhost:5000/update" method="POST">
-                    <input type="hidden"  name="mark complete" value="{{item.id}}">
-                    <button type="submit" class="btn btn-success" type="button">Mark as complete</button>
-                  </form>
+                  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"></div>
+                    <div class="btn-group mr-1" role="group" aria-label="complete">
+                      <form action="http://localhost:5000/update" method="POST">
+                        <input type="hidden"  name="mark complete" value="{{item.id}}">
+                        <button type="submit" class="btn btn-success btn-sm" type="button">Mark as complete</button>
+                      </form>
+                    </div>
+                    <div class="btn-group mr-1" role="group" aria-label="Delete">
+                      <form action="http://localhost:5000/remove" method="POST">
+                        <input type="hidden"  name="delete item" value="{{item.id}}">
+                        <button type="submit" class="btn btn-danger btn-sm" type="button">Delete item</button>
+                      </div>
+                      </form>
+                  </div>
+                </td>
               </tr>
               {% endfor %}
             </tbody>

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from todo_app.data.session_items import get_items, add_item, get_item, save_item
+from todo_app.data.session_items import get_items, add_item, get_item, save_item, delete_item
 
 from todo_app.flask_config import Config
 
@@ -9,12 +9,20 @@ app.config.from_object(Config())
 
 @app.route('/')
 def index():
+    """
+    Returns the list of saved todo items and sorts by status in descending order. Sorts the item list by status ("Not Started", then "Completed")
+
+    """
     items = get_items()
     sorted_items = sorted(items, key=lambda item: item["status"], reverse=True)
     return render_template("index.html", items=sorted_items)
 
 @app.route('/item', methods = ['POST', 'GET'])
 def add_task():
+    """
+    Returns the list of saved todo items. Redirects the user back to the index page
+
+    """
     if request.method == "POST":
         new_item = request.form.get("title")
         add_item(new_item)
@@ -24,6 +32,10 @@ def add_task():
 
 @app.route('/update', methods = ['POST', 'GET'])
 def complete_task():
+    """
+    Marks an item as completed. Redirects the user back to the index page
+
+    """
     if request.method == "POST":
         completed_item = request.form.get("mark complete")
         update_item = get_item(completed_item)
@@ -32,4 +44,19 @@ def complete_task():
         return redirect(url_for('index'))
     else:
         return render_template("index.html")
+
+@app.route('/remove', methods = ['POST', 'GET'])
+def delete_task():
+    """
+    Removes an item from the session using new funtion called delete_item from session_items.
+    
+    """
+    if request.method == "POST":
+        remove_item = request.form.get("delete item")
+        update_item = get_item(remove_item)
+        delete_item(update_item)
+        return redirect(url_for('index'))
+    else:
+        return render_template("index.html")
+
 
