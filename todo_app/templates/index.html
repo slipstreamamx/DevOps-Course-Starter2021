@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 {% block title %}To-Do App{% endblock %}
-
 {% block content %}
   <div class="jumbotron">
     <h1 class="display-4">To-Do App</h1>
     <p class="lead">Just another to-do app.</p>
   </div>
-
   <div class="row">
     <div class="col-md-12">
       <h3>Items</h3>
@@ -17,6 +15,7 @@
                 <th>Id</th>
                 <th>Task</th>
                 <th>Status</th>
+                <th>Action</th>
               </tr>
             <tbody>
               {% for item in items%}
@@ -24,6 +23,11 @@
                 <td>{{item.id}}</td>
                 <td>{{item.title}}</td>
                 <td>{{item.status}}</td>
+                <td>
+                  <form action="http://localhost:5000/update" method="POST">
+                    <input type="hidden"  name="mark complete" value="{{item.id}}">
+                    <button type="submit" class="btn btn-success" type="button">Completed</button>
+                  </form>
               </tr>
               {% endfor %}
             </tbody>
@@ -32,19 +36,15 @@
       </ul>
     </div>
   </div>
-  <html>
-    <body>
-      <form action="http://localhost:5000/item" method="POST">
-        <div class="row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Add task here" name="title">
-          </div>
-          <div class="col">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-      </form>
-    </body>
-  </html>
+  <form action="http://localhost:5000/item" method="POST">
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Add task here" name="title">
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
 {% endblock %}
 
