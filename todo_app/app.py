@@ -45,11 +45,26 @@ def complete_task():
     else:
         return render_template("index.html")
 
+@app.route('/inprogress', methods = ['POST', 'GET'])
+def task_inprogress():
+    """
+    Sets an item as in progresss. Redirects the user back to the index page
+
+    """
+    if request.method == "POST":
+        item_in_progress = request.form.get("set to progress")
+        update_item = get_item(item_in_progress)
+        update_item["status"] = "In Progress"
+        save_item(update_item)
+        return redirect(url_for('index'))
+    else:
+        return render_template("index.html")
+
 @app.route('/remove', methods = ['POST', 'GET'])
 def delete_task():
     """
     Removes an item from the session using new funtion called delete_item from session_items.
-    
+
     """
     if request.method == "POST":
         remove_item = request.form.get("delete item")
