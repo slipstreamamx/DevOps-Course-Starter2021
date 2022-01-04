@@ -26,19 +26,19 @@
                 <td>
                   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"></div>
                     <div class="btn-group mr-1" role="group" aria-label="in progress">
-                      <form action="http://localhost:5000/inprogress" method="POST">
+                      <form action="/inprogress" method="POST">
                         <input type="hidden"  name="set to progress" value="{{item.id}}">
                         <button type="submit" class="btn btn-primary btn-sm" type="button">In progress</button>
                       </form>
                     </div>
                     <div class="btn-group mr-1" role="group" aria-label="complete">
-                      <form action="http://localhost:5000/update" method="POST">
+                      <form action="/complete" method="POST">
                         <input type="hidden"  name="mark complete" value="{{item.id}}">
                         <button type="submit" class="btn btn-success btn-sm" type="button">Mark as complete</button>
                       </form>
                     </div>
                     <div class="btn-group mr-1" role="group" aria-label="Delete">
-                      <form action="http://localhost:5000/remove" method="POST">
+                      <form action="/remove" method="POST">
                         <input type="hidden"  name="delete item" value="{{item.id}}">
                         <button type="submit" class="btn btn-danger btn-sm" type="button">Delete item</button>
                       </div>

@@ -17,7 +17,7 @@ def index():
     sorted_items = sorted(items, key=lambda item: item["status"], reverse=True)
     return render_template("index.html", items=sorted_items)
 
-@app.route('/item', methods = ['POST', 'GET'])
+@app.route('/item', methods = ['POST'])
 def add_task():
     """
     Returns the list of saved todo items. Redirects the user back to the index page
@@ -30,7 +30,7 @@ def add_task():
     else:
         return render_template("index.html")
 
-@app.route('/update', methods = ['POST', 'GET'])
+@app.route('/complete', methods = ['POST', 'GET'])
 def complete_task():
     """
     Marks an item as completed. Redirects the user back to the index page
