@@ -50,3 +50,9 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+### Create a Trello account and API key
+
+We're going to be using Trello's API to fetch and save to-do tasks. 
+1. Create an account by visiting this link https://trello.com/signup in you're favourite browser.
+2. Generate an API Key and get ypur token
