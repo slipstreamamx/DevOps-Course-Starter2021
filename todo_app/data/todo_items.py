@@ -1,6 +1,6 @@
 class Item:
 
-    def __init__(self, id, short_id, name, status = 'To Do'):
+    def __init__(self, id, short_id, name, status = 'Not Started'):
         self.id = id
         self.short_id = short_id
         self.name = name
@@ -11,10 +11,10 @@ class Item:
         return cls(card['id'],card['idShort'], card['name'],list['name'])
 
     def start(self):
-        self.status='Doing'
+        self.status='In Progress'
 
     def complete(self):
-        self.status='Done'
+        self.status='Completed'
 
     def reset(self):
-        self.status= 'To Do'
+        self.status= 'Not Started'
