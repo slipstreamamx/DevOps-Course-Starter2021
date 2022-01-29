@@ -1,5 +1,4 @@
 from todo_app.data.todo_items import Item
-from urllib import response
 import requests, os
 from dotenv import load_dotenv
 load_dotenv()
@@ -38,9 +37,9 @@ def get_items():
     for card_list in lists:
         for card in card_list['cards']:
             items.append(Item.fromTrelloCard(card, card_list))
-    print(items)
     return items
-get_items()
+
+
 
 
 

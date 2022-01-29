@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from todo_app.data.session_items import get_items, add_item, get_item, save_item, delete_item
+from todo_app.data.trello_items import get_items
 
 from todo_app.flask_config import Config
 
@@ -13,8 +13,8 @@ def index():
 
     """
     items = get_items()
-    sorted_items = sorted(items, key=lambda item: item["status"], reverse=True)
-    return render_template("index.html", items=sorted_items)
+    # sorted_items = sorted(items, key=lambda item: item["status"], reverse=True)
+    return render_template("index.html", items=items)
 
 @app.route('/item', methods = ['POST'])
 def add_task():
