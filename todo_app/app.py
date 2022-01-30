@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from todo_app.data.trello_items import get_items
+from todo_app.data.trello_items import get_items, add_item
 
 from todo_app.flask_config import Config
 
@@ -19,7 +19,7 @@ def index():
 @app.route('/item', methods = ['POST'])
 def add_task():
     """
-    Returns the list of saved todo items. Redirects the user back to the index page
+    Returns the list of saved todo items from Trello web app. Redirects the user back to the index page
 
     """
     if request.method == "POST":
