@@ -83,6 +83,10 @@ def item_completed(id):
     card = move_card_to_list(id, done_list)
     return Item.fromTrelloCard(card, done_list)
 
+def reset_item_status(id):
+    todo_list = get_list('Not Started')
+    card = move_card_to_list(id,todo_list)
+    return Item.fromTrelloCard(card, todo_list)
 
 
 

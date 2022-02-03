@@ -26,19 +26,19 @@
                 <td>
                   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"></div>
                     <div class="btn-group mr-1" role="group" aria-label="in progress">
-                      <form action="{{ url_for('item_inprogress') }}" method="POST">
+                      <form action="{{ url_for('set_item_in_progress') }}" method="POST">
                         <input type="hidden"  name="set to progress" value="{{item.id}}">
                         <button type="submit" class="btn btn-primary btn-sm" type="button">In progress</button>
                       </form>
                     </div>
                     <div class="btn-group mr-1" role="group" aria-label="Completed">
-                      <form action="{{ url_for('complete_item') }}" method="POST">
+                      <form action="{{ url_for('set_item_complete') }}" method="POST">
                         <input type="hidden"  name="mark as completed" value="{{item.id}}">
                         <button type="submit" class="btn btn-success btn-sm" type="button">Completed</button>
                       </form>
                     </div>
                     <div class="btn-group mr-1" role="group" aria-label="No Started">
-                      <form action="/remove" method="POST">
+                      <form action="{{ url_for('reset_status') }}" method="POST">
                         <input type="hidden"  name="Reset item status" value="{{item.id}}">
                         <button type="submit" class="btn btn-danger btn-sm" type="button">No Started</button>
                       </div>
