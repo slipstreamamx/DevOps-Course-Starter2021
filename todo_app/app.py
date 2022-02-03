@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from todo_app.data.trello_items import get_items, add_item
+from todo_app.data.trello_items import get_items, add_item, in_progress
 
 from todo_app.flask_config import Config
 
@@ -52,9 +52,9 @@ def task_inprogress():
     """
     if request.method == "POST":
         item_in_progress = request.form.get("set to progress")
-        update_item = get_item(item_in_progress)
-        update_item["status"] = "In Progress"
-        save_item(update_item)
+        in_progress(item_in_progress)
+        # update_item["status"] = "In Progress"
+        # save_item(update_item)
         return redirect(url_for('index'))
     else:
         return render_template("index.html")
