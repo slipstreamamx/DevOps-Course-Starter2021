@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from todo_app.data.trello_items import get_items, add_item, in_progress
+from todo_app.data.trello_items import get_items, add_item, item_in_progress, item_completed
 
 from todo_app.flask_config import Config
 
@@ -17,7 +17,7 @@ def index():
     return render_template("index.html", items=items)
 
 @app.route('/item', methods = ['POST'])
-def add_task():
+def add_item():
     """
     Returns the list of saved todo items from Trello web app. Redirects the user back to the index page
 
@@ -30,29 +30,29 @@ def add_task():
         return render_template("index.html")
 
 @app.route('/complete', methods = ['POST', 'GET'])
-def complete_task():
+def complete_item():
     """
     Marks an item as completed. Redirects the user back to the index page
 
     """
     if request.method == "POST":
-        completed_item = request.form.get("mark complete")
-        update_item = get_item(completed_item)
-        update_item["status"] = "Completed"
-        save_item(update_item)
+        completed_item = request.form.get("mark as completed")
+        # update_item = get_item(completed_item)
+        # update_item["status"] = "Completed"
+        item_completed(completed_item)
         return redirect(url_for('index'))
     else:
         return render_template("index.html")
 
 @app.route('/inprogress', methods = ['POST', 'GET'])
-def task_inprogress():
+def item_inprogress():
     """
     Sets an item as in progresss. Redirects the user back to the index page
 
     """
     if request.method == "POST":
-        item_in_progress = request.form.get("set to progress")
-        in_progress(item_in_progress)
+        in_progress = request.form.get("set to progress")
+        item_in_progress(in_progress)
         # update_item["status"] = "In Progress"
         # save_item(update_item)
         return redirect(url_for('index'))
@@ -66,9 +66,9 @@ def delete_task():
 
     """
     if request.method == "POST":
-        remove_item = request.form.get("delete item")
-        update_item = get_item(remove_item)
-        delete_item(update_item)
+        remove_item = request.form.get("Reset item status")
+        # update_item = get_item(remove_item)
+        # delete_item(update_item)
         return redirect(url_for('index'))
     else:
         return render_template("index.html")

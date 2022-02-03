@@ -73,10 +73,16 @@ def move_card_to_list(card_id, list):
     card = response.json()
     return card
 
-def in_progress(id):
+def item_in_progress(id):
     doing_list = get_list('In Progress')
-    card = move_card_to_list(id, doing_list)
+    card = move_card_to_list(id, doing_list) 
     return Item.fromTrelloCard(card, doing_list)
+
+def item_completed(id):
+    done_list = get_list('Completed')
+    card = move_card_to_list(id, done_list)
+    return Item.fromTrelloCard(card, done_list)
+
 
 
 
