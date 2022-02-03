@@ -16,7 +16,7 @@ def index():
     return render_template("index.html", items=items)
 
 @app.route('/item', methods = ['POST'])
-def add_item():
+def add_new_item():
     """
     Returns the list of saved todo items from Trello web app. Redirects the user back to the index page
 
