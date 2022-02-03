@@ -55,7 +55,7 @@ def set_item_in_progress():
         return render_template("index.html")
 
 @app.route('/reset', methods = ['POST', 'GET'])
-def reset_item_status():
+def set_item_status():
     """
     Resets an item status.
 
