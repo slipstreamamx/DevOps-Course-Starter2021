@@ -14,6 +14,8 @@
               <tr class="table-primary">
                 <th>Id</th>
                 <th>Item</th>
+                <th>Description</th>
+                <th>Due Date</th>
                 <th>Status</th>
                 <th>Update Item Status</th>
               </tr>
@@ -22,6 +24,8 @@
               <tr>
                 <td>{{item.short_id}}</td>
                 <td>{{item.name}}</td>
+                <td>{{item.desc}}</td>
+                <td>{{item.due}}</td>
                 <td>{{item.status}}</td>
                 <td>
                   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"></div>
@@ -53,10 +57,13 @@
       </ul>
     </div>
   </div>
-  <form action="{{ url_for('add_new_item') }}" method="POST">
+  <form class="form-group" action="{{ url_for('add_new_item') }}" method="POST">
     <div class="row">
       <div class="col">
         <input type="text" class="form-control" placeholder="Add item here" name="title">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Add item description here" name="desc text">
       </div>
       <div class="col">
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -55,13 +55,13 @@ def get_items():
             items.append(Item.fromTrelloCard(card, card_list))
     return items
 
-def add_item(name):
+def add_item(name, desc):
     """
     This function new task (name) as its parameter provided when the user submits new task. It reterives list 'not started' ID from get_list() function.
     """
     todo_list = get_list('Not Started')
     url = build_url('/cards')
-    params = build_params({'name': name, 'idList':todo_list['id']})
+    params = build_params({'name': name, 'desc': desc, 'idList':todo_list['id']})
     response = requests.post(url, params = params)
     card = response.json()
     return Item.fromTrelloCard(card, todo_list)
