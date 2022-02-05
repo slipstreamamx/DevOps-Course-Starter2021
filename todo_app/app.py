@@ -9,8 +9,7 @@ app.config.from_object(Config())
 @app.route('/')
 def index():
     """
-    Returns the list of saved todo items and sorts by status in descending order. Sorts the item list by status ("Not Started", then "Completed")
-
+    Returns the list of saved todo items.
     """
     items = get_items()
     return render_template("index.html", items=items)
@@ -29,7 +28,7 @@ def add_new_item():
         return render_template("index.html")
 
 @app.route('/complete', methods = ['POST', 'GET'])
-def set_item_complete():
+def set_item_to_complete():
     """
     Marks an item as completed. Redirects the user back to the index page
 
@@ -42,7 +41,7 @@ def set_item_complete():
         return render_template("index.html")
 
 @app.route('/inprogress', methods = ['POST', 'GET'])
-def set_item_in_progress():
+def set_item_to_progress():
     """
     Sets an item as in progresss. Redirects the user back to the index page
 
