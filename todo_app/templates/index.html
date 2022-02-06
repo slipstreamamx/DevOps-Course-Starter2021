@@ -66,6 +66,9 @@
         <input type="text" class="form-control" placeholder="Add item description here" name="desc text">
       </div>
       <div class="col">
+        <input type="date" id="date" class="form-control" name="date" value="{{ selectedDate if selectedDate else todaysDate }}">
+      </div>
+      <div class="col">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>

@@ -23,7 +23,8 @@ def add_new_item():
     if request.method == "POST":
         title = request.form.get("title")
         desc = request.form.get("desc text")
-        add_item(title, desc)
+        due = request.form.get("date")
+        add_item(title, desc, due)
         return redirect(url_for('index'))
     else:
         return render_template("index.html")
