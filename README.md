@@ -99,11 +99,10 @@ sudo pip install ansible
 $ ssh USERNAME@USERNAME@IP-ADDRESS ## this is the managed node IP address. Once connected exit with command "exit".
 ```
 
-6. Ansible to manage the second VM, it needs to connect via SSH. Set up SSH key pair and run the commands on the Control Node and use the Managed 
-Node's address for the copy command.
+6. Ansible to manage the second VM, it needs to connect via SSH. Set up SSH key pair and run the commands on the Control Node and use the Managed Node's address for the copy command.
 
-• Run ssh-keygen to generate an SSH key pair. This will generate it in the ec2-user's `.ssh` directory.
-• Use the ssh-copy-id tool as before, but specifying the second VM's address this time.
+- Run ssh-keygen to generate an SSH key pair. This will generate it in the ec2-user's `.ssh` directory.
+- Use the ssh-copy-id tool as before, but specifying the second VM's address this time.
 
 7. Create an Inventory file (on the Control Node) listing your Ansible Managed Node(s). Include a single group andwithin that group, the address of a single managed node (either IP address or domain name).
 
