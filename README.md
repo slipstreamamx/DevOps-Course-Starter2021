@@ -71,18 +71,20 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 Ansible involves two or more machines. You will need a Control Node and Managed Nodes.
 
-You need SSH key for authentication. if you don't have one already please follow the instructions here: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
-
 1. Use the ssh command to conenction to the Control Node:
-```bash
+```
 $ ssh USERNAME@IP-ADDRESS
 ```
-2. Add public SSH key to the VM. Run ssh-copy-id from the command from your local shell and will require password one last time. For example: 
-```bash
-$ ssh-copy-id ec2-user@18.130.135.229
+This will prompt you for a password each time you want to connect. End the SSH session by running the command `exit`. Your terminal should end up on 
+your own machine again. 
+
+If you don't have one already, create an SSH key pair with the ssh-keygen command line tool. This will generate the key pair in an ".ssh" directory in your home directory.
+
+2. Keep the private part private and add public SSH key to the VM. Run ssh-copy-id from the command from your local shell and will require password one last time. For example: 
 ```
+$ ssh-copy-id ec2-user@18.130.135.229 ### this is control node IP address. You can now SSH to the VM without a password.
 3. Check if Ansible is installed by running:
-```bash
+```
 $ ansible --version 
 ```
 if Ansible is not installed go to step 4 otherwise go to step 5.
