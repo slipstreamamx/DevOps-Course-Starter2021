@@ -26,8 +26,6 @@ def add_new_item():
         due = request.form.get("date")
         add_item(title, desc, due)
         return redirect(url_for('index'))
-    else:
-        return render_template("index.html")
 
 @app.route('/complete', methods = ['POST', 'GET'])
 def set_item_to_complete():
