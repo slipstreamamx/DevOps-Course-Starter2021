@@ -37,12 +37,6 @@ We will be using external library called Requests (https://docs.python-requests.
 $ poetry add requests
 ```
 
-```python-dotenv
-We will be using Python-dotenv to reads key-value pairs from a .env file for API Key, Token and Board ID.
-
-pip install python-dotenv
-```
-
 ### Create a Trello account and API key
 
 We're going to be using Trello's API to fetch and save to-do tasks. 
