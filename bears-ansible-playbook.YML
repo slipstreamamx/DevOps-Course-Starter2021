@@ -1,0 +1,76 @@
+- name: Install To Do App on new web server
+  hosts: bearsapp
+  remote_user: ec2-user
+
+  vars_prompt:
+  - name: trello_api_key
+    prompt: Please provide your Trello API Key
+    private: Yes
+  - name: trello_token
+    prompt: Please provide your Trello Token
+    private: yes
+  - name: trello_board_id
+    prompt: Please provide your Trello_Board_ID
+    private: yes
+
+
+  tasks:
+  - name: install git
+    ansible.builtin.yum:
+            name: git
+            state: present
+    become: yes
+
+  - name: install Python
+    ansible.builtin.yum:
+            name: python3
+            state: present
+    become: yes
+
+  - name: install poetry
+    ansible.builtin.shell:
+            cmd: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python3
+            creates: /root/.poetry/bin/poetry
+
+    become: yes
+
+  - name: Create directory for the To-Do-App code
+    ansible.builtin.file:
+            path: /opt/todoapp
+            state: directory
+            owner: ec2-user
+    become: yes
+
+  - name: Get the latest version of todoapp from Github repo
+    ansible.builtin.git:
+            repo: https://github.com/slipstreamamx/DevOps-Course-Starter2021.git
+            dest: /opt/todoapp
+            single_branch: yes
+            version: excercise-4
+    become: yes
+
+  - name: install project dependencies
+    ansible.builtin.shell:
+            chdir: /opt/todoapp
+            cmd: source ~/.bash_profile && poetry install
+    become: yes
+
+  - name: Create a env file on host
+    ansible.builtin.template:
+            src: .env.j2
+            dest: /opt/todoapp/.env
+    become: yes
+
+  - name: Copy services to host
+    ansible.builtin.copy:
+            src: todoapp.service
+            dest: /etc/systemd/system/todoapp.service
+    become: yes
+
+  - name: start service
+    ansible.builtin.systemd:
+            name: todoapp.service
+            state: started
+            enabled: yes
+            daemon_reload: yes
+    become: yes
