@@ -83,13 +83,16 @@ If you don't have one already, create an SSH key pair with the ssh-keygen comman
 2. Keep the private part private and add public SSH key to the VM. Run ssh-copy-id from the command from your local shell and will require password one last time. For example: 
 ```
 $ ssh-copy-id ec2-user@18.130.135.229 ### this is control node IP address. You can now SSH to the VM without a password.
+```
 3. Check if Ansible is installed by running:
 ```
+Check if Ansible is installed onto the Control Node.
 $ ansible --version 
 ```
 if Ansible is not installed go to step 4 otherwise go to step 5.
+4. Install Anisble
 ```
-4. sudo pip install ansible
+sudo pip install ansible
 ```
 5. Check you can connect to the managed node from the control node. For example ssh USERNAME@IP-ADDRESSOFTHEMANAGEDNODE. Once connected exit with command "exit".
 6. Ansible to manage the second VM, it needs to connect via SSH. Set up SSH key pair.
