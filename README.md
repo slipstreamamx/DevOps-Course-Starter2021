@@ -97,6 +97,7 @@ sudo pip install ansible
 5. Check you can connect to the managed node from the control node.
 ```
 $ ssh USERNAME@USERNAME@IP-ADDRESS ## this is the managed node IP address. Once connected exit with command "exit".
+```
 
 6. Ansible to manage the second VM, it needs to connect via SSH. Set up SSH key pair and run the commands on the Control Node and use the Managed 
 Node's address for the copy command.
