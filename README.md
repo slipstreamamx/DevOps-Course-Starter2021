@@ -96,15 +96,13 @@ sudo pip install ansible
 ```
 5. Check you can connect to the managed node from the control node.
 ```
-$ ssh USERNAME@USERNAME@IP-ADDRESS ## this is the managed node IP address.
-```
-Once connected exit with command "exit".
+$ ssh USERNAME@USERNAME@IP-ADDRESS ## this is the managed node IP address. Once connected exit with command "exit".
 
 6. Ansible to manage the second VM, it needs to connect via SSH. Set up SSH key pair and run the commands on the Control Node and use the Managed 
 Node's address for the copy command.
 
-• Run ssh-keygen to generate an SSH key pair. This will generate it in the ec2-user's `.ssh` directory
-• Use the ssh-copy-id tool as before, but specifying the second VM's address this time
+• Run ssh-keygen to generate an SSH key pair. This will generate it in the ec2-user's `.ssh` directory.
+• Use the ssh-copy-id tool as before, but specifying the second VM's address this time.
 
 7. Create an Inventory file (on the Control Node) listing your Ansible Managed Node(s). Include a single group andwithin that group, the address of a single managed node (either IP address or domain name).
 
@@ -112,6 +110,6 @@ Node's address for the copy command.
 
 9. Create a ".env.j2" template file on the control node and include the variables as per .env.j2 template.
 
-10.Create a file called "todoapp.service on the control node and include the details as per todoapp.service
+10. Create a file called "todoapp.service on the control node and include the details as per todoapp.service
 
 11. Start the app by running ansible-playbook YOUR_PLAYBOOK_FILE -i YOUR_INVENTORY_FILE. then visit the site in your browser using the IP address of the host VM followed by ":5000"
