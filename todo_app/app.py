@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from todo_app.data.trello_items import get_items, add_item, item_in_progress, item_completed, reset_item_status
 
 from todo_app.flask_config import Config
+from todo_app.view_model import ViewModel
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -12,7 +13,8 @@ def index():
     Returns the list of saved todo items.
     """
     items = get_items()
-    return render_template("index.html", items=items)
+    item_view_model = ViewModel(items)
+    return render_template("index.html", view_model=item_view_model)
 
 @app.route('/item', methods = ['POST'])
 def add_new_item():

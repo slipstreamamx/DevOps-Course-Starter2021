@@ -44,7 +44,7 @@ We're going to be using Trello's API to fetch and save to-do tasks.
 2. Generate an API Key and get your token
 3. Update add the API_KEY and API_TOKEN to the `.env` file in your project folder.
 4. On https://trello.com/ create a new board and give a title (e.g. todo_app).  
-5. Add lists to your board by creating a three lists called "Not Strted","In Progress" and "Completed"
+5. Add lists to your board by creating a three lists called "Not Started","In Progress" and "Completed"
 6. Once you have created your board you well need the BOARD_ID. To get the Board ID you need to use this API in POSTMAN https://api.trello.com/1/members/me/boards?fields=name,url&key={apiKey}&token={apiToken}
 7. Update the BOARD_ID to the `.env` file in your project folder
 

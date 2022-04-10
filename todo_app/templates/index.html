@@ -20,7 +20,7 @@
                 <th style="width: 30%">Update Item Status</th>
               </tr>
             <tbody>
-              {% for item in items%}
+              {% for item in view_model.items %}
               <tr>
                 <td>{{item.short_id}}</td>
                 <td>{{item.name}}</td>
