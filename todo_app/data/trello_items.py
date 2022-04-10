@@ -1,8 +1,5 @@
 from todo_app.data.todo_items import Item
 import requests, os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def get_auth_params():
     """
