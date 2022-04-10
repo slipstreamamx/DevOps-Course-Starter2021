@@ -1,4 +1,4 @@
-
+from datetime import datetime
 class Item:
 
     def __init__(self, id, short_id, name, desc, due, status = 'Not Started'):
@@ -11,16 +11,13 @@ class Item:
 
     @classmethod
     def fromTrelloCard(cls, card, list):
-        due_date_string = str(card['due'])
-        due = due_date_string[0:10]
+        due_string = ''
+        if card['due'] is not None:
+            # format here should match the Trello datetimes
+            trello_date_format = '%Y-%m-%dT%H:%M:%S.%fZ'
+            # use strptime to convert the string to a datetime
+            due_datetime = datetime.strptime(card['due'], trello_date_format)
+           # convert to just the date, and then take the string
+            due_string = str(due_datetime.date())
       
-        return cls(card['id'],card['idShort'], card['name'], card['desc'], due, list['name'])
-
-    def start(self):
-        self.status='In Progress'
-
-    def complete(self):
-        self.status='Completed'
-
-    def reset(self):
-        self.status= 'Not Started'
+        return cls(card['id'],card['idShort'], card['name'], card['desc'], due_string, list['name'])
