@@ -6,15 +6,15 @@ class ViewModel:
     def items(self):
         return self._items
 
-    # @property
-    # def not_started_items(self):
-    #     return [item for item in self._items if item.status == 'Not Started']
+    @property
+    def not_started_items(self):
+        return [item for item in self._items if item.status == 'Not Started']
 
-    # @property
-    # def In_Progress_items(self):
-    #     return [item for item in self._items if item.status == 'In Progress']
+    @property
+    def In_Progress_items(self):
+        return [item for item in self._items if item.status == 'In Progress']
 
-    # @property
-    # def Completed_items(self):
-    #     return [ item for item in self._items if item.status == 'Completed']
+    @property
+    def Completed_items(self):
+        return [ item for item in self._items if item.status == 'Completed']
 
