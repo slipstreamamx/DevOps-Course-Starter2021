@@ -1,4 +1,3 @@
-import pytest
 from datetime import datetime
 from freezegun import freeze_time
 from todo_app.data.trello_items import Item
