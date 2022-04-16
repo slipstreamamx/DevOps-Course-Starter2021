@@ -68,4 +68,3 @@ def set_item_status():
     else:
         return render_template("index.html")
 
-
