@@ -5,20 +5,20 @@
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">{{ item.name }}</h5>
     {% if item.status == 'Completed' %}
-      {% set badge_style = 'badge-success' %}
-    {% elif item.status == 'Not Started' %}
-      {% set badge_style = 'badge-secondary' %}
-    {% else %}
       {% set badge_style = 'badge-primary' %}
+    {% elif item.status == 'Not Started' %}
+      {% set badge_style = 'badge-danger' %}
+    {% else %}
+      {% set badge_style = 'badge-success' %}
     {% endif %}
     <div><span class="badge {{ badge_style }}">{{ item.status }}</span></div>
   </div>
   {% if item.status == 'Completed' %}
     <a href="{{ url_for('set_item_status', item_id=item.id) }}" class="btn btn-sm btn-secondary">Reset item status</a>
   {% elif item.status == 'Not Started' %}
-    <a href="{{ url_for('set_item_to_progress', item_id=item.id) }}" class="btn btn-sm btn-success">set to progress</a>
+    <a href="{{ url_for('set_item_to_progress', item_id=item.id) }}" class="btn btn-sm btn-danger">set to progress</a>
   {% else %}
-    <a href="{{ url_for('set_item_status', item_id=item.id) }}" class="btn btn-sm btn-primary">mark as completed</a>
+    <a href="{{ url_for('set_item_to_complete', item_id=item.id) }}" class="btn btn-sm btn-primary">mark as completed</a>
   {% endif %}
 </li>
 {%- endmacro %}
@@ -52,7 +52,7 @@
           <div class="col">
             <input type="text" name="name" id="name-input" class="form-control" placeholder="Add item here" aria-label="Name" data-test-id="name-input">
           </div>
-          <<div class="col">
+          <div class="col">
             <input type="text" class="form-control" placeholder="Add item description here" name="desc text">
           </div>
           <div class="col">
