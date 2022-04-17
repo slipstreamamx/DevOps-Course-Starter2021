@@ -14,9 +14,11 @@ def index():
     return render_template('index.html', view_model=item_view_model)
 
 @app.route('/items/new', methods=['POST'])
-def add_item():
+def add_new_item():
     name = request.form['name']
-    add_item(name)
+    desc = request.form.get("desc text")
+    due = request.form.get("date")
+    add_item(name, desc, due)
     return redirect(url_for('index'))
 
 @app.route('/items/<item_id>/in_progress')

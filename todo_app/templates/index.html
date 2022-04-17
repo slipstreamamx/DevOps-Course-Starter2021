@@ -47,10 +47,16 @@
   <div class="row">
     <div class="col-md-12">
       <h2>New item</h2>
-      <form action="{{ url_for('add_item') }}" method="POST">
+      <form action="{{ url_for('add_new_item') }}" method="POST">
         <div class="form-group form-row align-items-center">
           <div class="col">
-            <input type="text" name="name" id="name-input" class="form-control" placeholder="Name" aria-label="Name" data-test-id="name-input">
+            <input type="text" name="name" id="name-input" class="form-control" placeholder="Add item here" aria-label="Name" data-test-id="name-input">
+          </div>
+          <<div class="col">
+            <input type="text" class="form-control" placeholder="Add item description here" name="desc text">
+          </div>
+          <div class="col">
+            <input type="date" id="date" class="form-control" name="date" value="{{ selectedDate if selectedDate else todaysDate }}">
           </div>
           <div class="col-auto">
             <button type="submit" class="btn btn-success">submit</button>
