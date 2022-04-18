@@ -29,7 +29,7 @@ def set_item_to_progress(item_id):
 @app.route('/items/<item_id>/complete')
 def set_item_to_complete(item_id):
     item_completed(item_id)
-    return redirect(url_for('todo.index'))
+    return redirect(url_for('index'))
 
 @app.route('/items/<item_id>/reset') 
 def set_item_status(item_id):    

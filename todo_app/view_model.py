@@ -11,21 +11,21 @@ class ViewModel:
         return [item for item in self._items if item.status == 'Not Started']
 
     @property
-    def In_Progress_items(self):
+    def in_Progress_items(self):
         return [item for item in self._items if item.status == 'In Progress']
 
     @property
-    def Completed_items(self):
+    def completed_items(self):
         return [ item for item in self._items if item.status == 'Completed']
     
     @property
-    def should_show_all_done_items(self):
-        return len(self.done_items) <= 5
+    def should_show_all_completed_items(self):
+        return len(self.completed_items) <= 5
 
     @property
-    def recent_done_items(self):
-        return [item for item in self.done_items if item.modified_today()]
+    def recent_completed_items(self):
+        return [item for item in self.completed_items if item.modified_today()]
 
     @property
-    def older_done_items(self):
-        return [item for item in self.done_items if not item.modified_today()]
+    def older_completed_items(self):
+        return [item for item in self.completed_items if not item.modified_today()]
