@@ -7,7 +7,7 @@ from todo_app.view_model import ViewModel
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())  
-    
+
     @app.route('/')
     def index():
         items = get_items()
@@ -17,8 +17,8 @@ def create_app():
     @app.route('/items/new', methods=['POST'])
     def add_new_item():
         name = request.form['name']
-        desc = request.form.get("desc text")
-        due = request.form.get("date")
+        desc = request.form["desc text"]
+        due = request.form["date"]
         add_item(name, desc, due)
         return redirect(url_for('index'))
 

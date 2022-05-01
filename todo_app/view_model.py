@@ -11,7 +11,7 @@ class ViewModel:
         return [item for item in self._items if item.status == 'Not Started']
 
     @property
-    def in_Progress_items(self):
+    def in_progress_items(self):
         return [item for item in self._items if item.status == 'In Progress']
 
     @property

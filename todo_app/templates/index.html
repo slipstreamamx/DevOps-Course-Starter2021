@@ -81,7 +81,7 @@
   </div>
 </div>
   {{ display_item_list('Not Started', view_model.not_started_items, 'not_started-section') }}
-  {{ display_item_list('In Progress', view_model.in_Progress_items, 'in_progress-section') }}
+  {{ display_item_list('In Progress', view_model.in_progress_items, 'in_progress-section') }}
 
   {% if view_model.should_show_all_completed_items %}
     {{ display_item_list('Completed', view_model.completed_items, 'completed-section') }}

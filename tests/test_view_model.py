@@ -11,7 +11,7 @@ def test_workflows_should_be_empty_if_there_are_no_matching_items():
     view_model = ViewModel(items)
 
     assert len(view_model.not_started_items) == 0
-    assert len(view_model.in_Progress_items) == 0
+    assert len(view_model.in_progress_items) == 0
     assert len(view_model.completed_items) == 0
 
 @freeze_time()
@@ -30,7 +30,7 @@ def test_items_are_grouped_into_workflows():
         Item('43d8', 2, 'Task 2', 'Task 2 not started', datetime.now(), datetime.now(), 'Not Started'),
         Item('k3d3', 5, 'Task 5', 'Task 5 not started', datetime.now(), datetime.now(), 'Not Started'),
     ]
-    assert view_model.in_Progress_items == [
+    assert view_model.in_progress_items == [
         Item('43d8', 3, 'Task 3', 'Task 3 in progress', datetime.now(), datetime.now(), 'In Progress'),
     ]
     assert view_model.completed_items == [
