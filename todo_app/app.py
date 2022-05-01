@@ -6,9 +6,8 @@ from todo_app.view_model import ViewModel
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config())
-  
-
+    app.config.from_object(Config())  
+    
     @app.route('/')
     def index():
         items = get_items()
