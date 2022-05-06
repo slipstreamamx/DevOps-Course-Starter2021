@@ -66,3 +66,11 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Running the Tests
+Pytest
+Pytest is required to run the test suite - https://pypi.org/project/pytest/
+
+Tests can be run as a whole by running `poetry run pytest`.
+
+To run the tests individually in vscode run `>Python: Discover Tests` from the command window (`Ctrl/Cmd + Shift + P`), select `pytest` as the test runner and then `.` as the test folder.
