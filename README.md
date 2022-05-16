@@ -74,3 +74,50 @@ Pytest is required to run the test suite - https://pypi.org/project/pytest/
 Tests can be run as a whole by running `poetry run pytest`.
 
 To run the tests individually in vscode run `>Python: Discover Tests` from the command window (`Ctrl/Cmd + Shift + P`), select `pytest` as the test runner and then `.` as the test folder.
+=======
+## Using Ansible to Provision a new Virtual Machine to host the To-Do app.
+
+Ansible involves two or more machines. You will need a Control Node and Managed Nodes.
+
+1. Use the ssh command to conenction to the Control Node:
+```
+$ ssh USERNAME@IP-ADDRESS
+```
+This will prompt you for a password each time you want to connect. End the SSH session by running the command `exit`. Your terminal should end up on 
+your own machine again. 
+
+If you don't have one already, create an SSH key pair with the ssh-keygen command line tool. This will generate the key pair in an ".ssh" directory in your home directory.
+
+2. Keep the private part private and add public SSH key to the VM. Run ssh-copy-id from the command from your local shell and will require password one last time. For example: 
+```
+$ ssh-copy-id ec2-user@18.130.135.229 ### this is control node IP address. You can now SSH to the VM without a password.
+```
+3. Check if Ansible is installed by running:
+```
+Check if Ansible is installed onto the Control Node.
+$ ansible --version  ## if Ansible is not installed go to step 4 otherwise go to step 5.
+```
+4. Install Anisble
+
+```
+sudo pip install ansible
+```
+5. Check you can connect to the managed node from the control node.
+```
+$ ssh USERNAME@USERNAME@IP-ADDRESS ## this is the managed node IP address. Once connected exit with command "exit".
+```
+
+6. Ansible to manage the second VM, it needs to connect via SSH. Set up SSH key pair and run the commands on the Control Node and use the Managed Node's address for the copy command.
+
+- Run ssh-keygen to generate an SSH key pair. This will generate it in the ec2-user's `.ssh` directory.
+- Use the ssh-copy-id tool as before, but specifying the second VM's address this time.
+
+7. Create an Inventory file (on the Control Node) listing your Ansible Managed Node(s). Include a single group andwithin that group, the address of a single managed node (either IP address or domain name).
+
+8. Create Anisble playbook which includes all the task as per "bears-ansible-playbook.YML" Test it out by running ansible-playbook YOUR_PLAYBOOK_FILE -i YOUR_INVENTORY_FILE.
+
+9. Create a ".env.j2" template file on the control node and include the variables as per .env.j2 template.
+
+10. Create a file called "todoapp.service on the control node and include the details as per todoapp.service
+
+11. Start the app by running ansible-playbook YOUR_PLAYBOOK_FILE -i YOUR_INVENTORY_FILE. then visit the site in your browser using the IP address of the host VM followed by ":5000"
