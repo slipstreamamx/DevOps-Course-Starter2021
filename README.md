@@ -44,7 +44,7 @@ We're going to be using Trello's API to fetch and save to-do tasks.
 2. Generate an API Key and get your token
 3. Update add the API_KEY and API_TOKEN to the `.env` file in your project folder.
 4. On https://trello.com/ create a new board and give a title (e.g. todo_app).  
-5. Add lists to your board by creating a three lists called "Not Strted","In Progress" and "Completed"
+5. Add lists to your board by creating a three lists called "Not Started","In Progress" and "Completed"
 6. Once you have created your board you well need the BOARD_ID. To get the Board ID you need to use this API in POSTMAN https://api.trello.com/1/members/me/boards?fields=name,url&key={apiKey}&token={apiToken}
 7. Update the BOARD_ID to the `.env` file in your project folder
 
@@ -67,6 +67,14 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
+## Running the Tests
+Pytest
+Pytest is required to run the test suite - https://pypi.org/project/pytest/
+
+Tests can be run as a whole by running `poetry run pytest`.
+
+To run the tests individually in vscode run `>Python: Discover Tests` from the command window (`Ctrl/Cmd + Shift + P`), select `pytest` as the test runner and then `.` as the test folder.
+=======
 ## Using Ansible to Provision a new Virtual Machine to host the To-Do app.
 
 Ansible involves two or more machines. You will need a Control Node and Managed Nodes.
