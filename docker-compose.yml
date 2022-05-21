@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  todo_app:
+    image: python:3.9-slim-buster
+      context: .
+      target: development
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./todo_app:/app/todo_app
+    env_file: .env
