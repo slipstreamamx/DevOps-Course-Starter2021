@@ -16,4 +16,4 @@ RUN apt update -y &&\
 
 ENV PATH="$HOME/.poetry/bin:$PATH"
 
-CMD ["./docker_entrypoint_launch.sh"]
+ENTRYPOINT ["poetry", "run", "flask", "run", "--host", "0.0.0.0", "--port", "5001"]
