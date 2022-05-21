@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd /usr/src/todo_app
+cd /usr/src
 
 $HOME/.poetry/bin/poetry run flask run --host=0.0.0.0
