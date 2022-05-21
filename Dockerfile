@@ -1,17 +1,23 @@
 FROM python:3.9-slim-buster as base
 
-ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
+RUN mkdir -p /usr/src/todo_app
 
-WORKDIR /app
+WORKDIR /usr/src/todo_app
 
-COPY poetry.lock pyproject.toml /app
+RUN apt update -y &&\ 
+    apt install curl -y &&\
+    curl -o get-poetry.py https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py &&\
+    chmod +x get-poetry.py &&\ 
+    python get-poetry.py &&\
+    . $HOME/.poetry/env
 
-RUN pip3 install poetry
+COPY . /usr/src/todo_app
 
+RUN $HOME/.poetry/bin/poetry install --no-interaction
+
+ENV PATH="$HOME/.poetry/bin:$PATH"
+
+FROM base as development
 EXPOSE 5001
-
-RUN poetry install
-
-COPY ./todo_app /app/todo_app
-
-ENTRYPOINT ["poetry", "run", "flask", "run", "--host", "0.0.0.0", "--port", "5001"]
+# run flask via a shell script for dev work
+CMD ["./docker_entrypoint_launch.sh"]

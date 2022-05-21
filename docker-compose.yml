@@ -1,11 +1,17 @@
 version: "3.9"
 services:
-  todo_app:
-    image: python:3.9-slim-buster
-      context: .
+  development:
+    build: 
+      context: "."
       target: development
+    image: todo-app:dev
+    container_name: todo_app_dev
     ports:
       - "5001:5000"
+    env_file:
+      - .env
+    # want to mount the current directory so we can make code changes
     volumes:
-      - ./todo_app:/app/todo_app
-    env_file: .env
+      - type: bind
+        source: ./
+        target: /usr/src/todo_app
