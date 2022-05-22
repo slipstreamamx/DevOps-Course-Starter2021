@@ -15,6 +15,5 @@ RUN poetry install
 COPY ./todo_app /app/todo_app
 
 FROM base as development
-EXPOSE 5001
-# run flask via a shell script for dev work
-CMD ["./docker_entrypoint_launch.sh"]
+
+ENTRYPOINT ["poetry", "run", "flask", "run", "--host", "0.0.0.0", "--port", "5001"]
