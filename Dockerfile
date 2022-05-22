@@ -26,3 +26,9 @@ COPY docker-entrypoint-prod.sh /app
 RUN chmod +x /var/log
 
 ENTRYPOINT ["./docker-entrypoint-prod.sh"]
+
+FROM base as testing
+EXPOSE 5002
+COPY docker-entrypoint-testing.sh /app
+COPY ./tests /app/tests
+ENTRYPOINT ["./docker-entrypoint-testing.sh"]

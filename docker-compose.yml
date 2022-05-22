@@ -2,7 +2,6 @@ version: "3.9"
 services:
 
   development:
-    image: python:3.9-slim-buster
     build:
       context: .
       target: development
@@ -16,7 +15,6 @@ services:
 
   
   production:
-    image: python:3.9-slim-buster
     build:
       context: .
       target: production
@@ -27,3 +25,12 @@ services:
     volumes:
       - ./todo_app:/app/todo_app
     env_file: .env
+  
+  testing:
+    build:
+      context: .
+      target: testing
+    image: todo-app:testing
+    container_name: todo_app_testing
+    env_file: .env.test
+
