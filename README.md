@@ -124,7 +124,7 @@ $ ssh USERNAME@USERNAME@IP-ADDRESS ## this is the managed node IP address. Once 
 
 ## Docker
 
-# Build Development and Production containers
+### Build Development and Production containers
 
 To build development images and containers, do the following:
 
@@ -145,7 +145,7 @@ Above builds the "production" stage from the Dockerfile, and docker-compose.yml 
 
 The local:container ports will be mapped to 5001:5000 by default
 
-# Build Testing containers
+### Build Testing containers
 
 To build test images and containers, do the following:
 
@@ -154,7 +154,7 @@ $ docker-compose up testing
 ```
 Above builds the "testing" stage from the Dockerfile, and docker-compose.yml tags the image as "todo-app:testing".
 
-# Building and Running All Containers (Production / Development / Testing)
+### Building and Running All Containers (Production / Development / Testing)
 
 To build and run images / containers for both prod and dev:
 
