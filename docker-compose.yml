@@ -1,6 +1,7 @@
 version: "3.9"
 services:
-  todo_app:
+
+  development:
     image: python:3.9-slim-buster
     build:
       context: .

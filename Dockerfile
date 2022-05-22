@@ -16,6 +16,6 @@ COPY ./todo_app /app/todo_app
 
 FROM base as development
 
-COPY docker-entrypoint.sh /app
+COPY docker-entrypoint-dev.sh /app
 
 ENTRYPOINT ["./docker-entrypoint-dev.sh"]
