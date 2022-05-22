@@ -6,8 +6,24 @@ services:
     build:
       context: .
       target: development
+    image: todo-app:dev
+    container_name: todo_app_dev
     ports:
       - "5001:5000"
+    volumes:
+      - ./todo_app:/app/todo_app
+    env_file: .env
+
+  
+  production:
+    image: python:3.9-slim-buster
+    build:
+      context: .
+      target: production
+    image: todo-app:prod
+    container_name: todo_app_prod
+    ports:
+      - "5000:5000"
     volumes:
       - ./todo_app:/app/todo_app
     env_file: .env
