@@ -74,7 +74,7 @@ Pytest is required to run the test suite - https://pypi.org/project/pytest/
 Tests can be run as a whole by running `poetry run pytest`.
 
 To run the tests individually in vscode run `>Python: Discover Tests` from the command window (`Ctrl/Cmd + Shift + P`), select `pytest` as the test runner and then `.` as the test folder.
-=======
+
 ## Using Ansible to Provision a new Virtual Machine to host the To-Do app.
 
 Ansible involves two or more machines. You will need a Control Node and Managed Nodes.
@@ -121,3 +121,43 @@ $ ssh USERNAME@USERNAME@IP-ADDRESS ## this is the managed node IP address. Once 
 10. Create a file called "todoapp.service on the control node and include the details as per todoapp.service
 
 11. Start the app by running ansible-playbook YOUR_PLAYBOOK_FILE -i YOUR_INVENTORY_FILE. then visit the site in your browser using the IP address of the host VM followed by ":5000"
+
+## Docker
+
+# Build Development and Production containers
+
+To build development images and containers, do the following:
+
+```
+$ docker-compose up development
+```
+
+Above builds the "development" stage from the Dockerfile, and docker-compose.yml tags the image as "todo-app:dev".
+
+The local:container ports will be mapped to 5000:5000 by default
+
+To build production images and containers, do the following:
+
+```
+$ docker-compose up production
+```
+Above builds the "production" stage from the Dockerfile, and docker-compose.yml tags the image as "todo-app:prod".
+
+The local:container ports will be mapped to 5001:5000 by default
+
+# Build Testing containers
+
+To build test images and containers, do the following:
+
+```
+$ docker-compose up testing
+```
+Above builds the "testing" stage from the Dockerfile, and docker-compose.yml tags the image as "todo-app:testing".
+
+# Building and Running All Containers (Production / Development / Testing)
+
+To build and run images / containers for both prod and dev:
+
+```
+$ docker-compose up -d
+```
