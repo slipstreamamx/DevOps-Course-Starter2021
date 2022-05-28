@@ -1,0 +1,13 @@
+# Environment vars to ignore
+.env.j2
+.env.template
+.env
+
+# Ansible files to ignore
+bears-ansible-playbook.YML
+bears-inventory.INI
+
+#
+todoapp.service
+.gitignore
+README.md
