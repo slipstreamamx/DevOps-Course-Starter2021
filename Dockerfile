@@ -23,7 +23,6 @@ ENTRYPOINT ["./docker-entrypoint-dev.sh"]
 FROM base as production
 
 COPY docker-entrypoint-prod.sh /app
-RUN chmod +x /var/log
 
 ENTRYPOINT ["./docker-entrypoint-prod.sh"]
 

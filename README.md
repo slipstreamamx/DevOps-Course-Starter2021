@@ -134,7 +134,7 @@ $ docker-compose up development
 
 Above builds the "development" stage from the Dockerfile, and docker-compose.yml tags the image as "todo-app:dev".
 
-The local:container ports will be mapped to 5000:5000 by default
+The local:container ports will be mapped to 5001:5000 by default
 
 To build production images and containers, do the following:
 
@@ -143,7 +143,7 @@ $ docker-compose up production
 ```
 Above builds the "production" stage from the Dockerfile, and docker-compose.yml tags the image as "todo-app:prod".
 
-The local:container ports will be mapped to 5001:5000 by default
+The local:container ports will be mapped to 5000:5000 by default
 
 ### Build Testing containers
 
