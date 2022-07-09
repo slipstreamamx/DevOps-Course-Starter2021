@@ -1,6 +1,15 @@
 name: Continuos Integration
-on: [push]
-
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - 'documentation'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - '.gitinore'
+      - 'documentation'
 jobs:
   build:
     name: Build and test
