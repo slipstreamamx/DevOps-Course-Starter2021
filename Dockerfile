@@ -31,5 +31,5 @@ EXPOSE 5002
 COPY docker-entrypoint-testing.sh /app
 COPY ./tests /app/tests
 # change the permission of the bash file to resolve github action error "starting container process caused: exec: "./docker-entrypoint-testing.sh": permission denied:"  
-RUN chmod +x entrypoint.sh
+RUN chmod +x docker-entrypoint-testing.sh
 ENTRYPOINT ["./docker-entrypoint-testing.sh"]
