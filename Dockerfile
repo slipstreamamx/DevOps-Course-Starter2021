@@ -1,16 +1,16 @@
-FROM python:3.9-slim-buster as base
+FROM python:3.8-slim-buster as base
 
 ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
 
 WORKDIR /app
 
-COPY poetry.lock pyproject.toml /app/
-
 RUN pip3 install poetry
+
+COPY poetry.lock pyproject.toml /app/
 
 EXPOSE 5001
 
-RUN poetry install
+RUN poetry config virtualenvs.create false --local && poetry install
 
 COPY ./todo_app /app/todo_app
 
