@@ -1,0 +1,10 @@
+Name: Continuos Integration
+on: [push]
+
+jobs:
+  build:
+    name: build and test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo Hello World
