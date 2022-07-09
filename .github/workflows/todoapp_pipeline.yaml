@@ -1,4 +1,4 @@
-Name: Continuos Integration
+name: Continuos Integration
 on: [push]
 
 jobs:
