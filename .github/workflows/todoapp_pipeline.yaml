@@ -3,11 +3,10 @@ on: [push]
 
 jobs:
   build:
-    name: build and test
+    name: Build and test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout files
+      - name: Checkout files 
         uses: actions/checkout@v2
       - name: Build docker
-        uses: docker build --target testing -- tag todo-app:testing .
-      
+        run: docker build --target test --tag todo-app:testing .
