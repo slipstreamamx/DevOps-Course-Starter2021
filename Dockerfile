@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster as base
+FROM python:3.9-slim-buster as base
 
 ENV PYTHONPATH=${PYTHONPATH}:${PWD} 
 
@@ -7,6 +7,7 @@ WORKDIR /app
 RUN pip3 install poetry
 
 COPY poetry.lock pyproject.toml /app/
+RUN  /app/pyproject.toml
 
 EXPOSE 5001
 
