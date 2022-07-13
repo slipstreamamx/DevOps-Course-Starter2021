@@ -31,15 +31,7 @@ def stub(url, params):
         return StubResponse(fake_response_data)
     
     if url == f'https://api.trello.com/1/cards':
-        fake_response_data = create_trello_card = {
-    "id": not_started_item_id,
-    "name": "Create a Task'",
-    "idShort": "7",
-    "desc": "Another Task",
-    "due": "2022-05-28T15:48:26.091Z",
-    "dateLastActivity": "2022-04-20T15:48:26.091Z",
-    
-}
+        fake_response_data = create_trello_card
         return StubResponse(fake_response_data)
     
     raise Exception(f'Integration test stub no mock for url "{url}"')
@@ -122,6 +114,14 @@ sample_trello_card = {
 
 form_data = {'name': 'Create a Task', 'desc text': 'Another Task', 'date': '2022-05-28T15:48:26.091Z'}
 
-
+create_trello_card = {
+    "id": not_started_item_id,
+    "name": "Create a Task'",
+    "idShort": "7",
+    "desc": "Another Task",
+    "due": "2022-05-28T15:48:26.091Z",
+    "dateLastActivity": "2022-04-20T15:48:26.091Z",
+    
+}
 
 
