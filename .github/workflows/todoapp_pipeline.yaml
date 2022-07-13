@@ -10,7 +10,8 @@ on:
       - 'README.md'
       - '.gitignore'
       - 'documentation'
-  
+  schedule:
+    - cron: 40 8 * * * 
 jobs:
   build:
     name: Build and test
