@@ -1,0 +1,25 @@
+name: Continuos Integration
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - 'documentation'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - 'documentation'
+  schedule:
+    - cron: '40 8 * * *' 
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout files 
+        uses: actions/checkout@v2
+      - name: Build docker
+        run: docker build --target testing --tag todo-app:testing .
+      - name: Run tests
+        run: docker run --env-file ./.env.test todo-app:testing
