@@ -22,4 +22,4 @@ jobs:
       - name: Build docker
         run: docker build --target testing --tag todo-app:testing .
       - name: Run tests
-        run: docker compose up testing --exit-code-from testing
+        run: docker compose up testing --env-file ./.env.test --exit-code-from testing
