@@ -19,7 +19,6 @@ jobs:
     steps:
       - name: Checkout files 
         uses: actions/checkout@v2
-      - name: Build docker
-        run: docker build --target testing --tag todo-app:testing .
-      - name: Run tests
-        run: docker compose up --env-file ./.env.test testing --exit-code-from testing
+      - name: Compose docker
+        run: docker compose up testing --exit-code-from testing
+
