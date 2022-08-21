@@ -24,9 +24,6 @@ jobs:
       - name: Run tests
         run: docker run --env-file ./.env.test todo-app:testing
   publish:
-    env:
-      DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_ACCESS_USER }}
-      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     if: (github.event_name == 'push' && github.ref == 'refs/heads/exercise-8')
     name: push to docker hub
     runs-on: ubuntu-latest
@@ -34,8 +31,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: $DOCKER_HUB_USER
-          password: $DOCKER_HUB_TOKEN
+          username: ${{ secrets.DOCKER_HUB_ACCESS_USER }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: build docker
         run: docker build --target production --tag /todo-app:production-${{ github.sha }} .
       - name: Push to docker hub
