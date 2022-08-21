@@ -36,7 +36,10 @@ jobs:
     name: push to docker hub
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout files 
+        uses: actions/checkout@v2
       - name: build docker
       - run: docker build --target producation --tag ${{ $github_sha}} .
+      - name: Push to docker hub
       - run: docker push ${{ $github_sha}}
     needs: build
