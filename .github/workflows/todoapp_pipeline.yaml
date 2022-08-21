@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}  
   publish:
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/exercise-8')
     name: push to docker hub
     runs-on: ubuntu-latest
     steps:
