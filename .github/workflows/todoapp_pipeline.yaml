@@ -34,9 +34,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}  
   publish:
       if: (github.event_name == 'push' && github.ref == 'refs/heads/main')
-    runs-on: ubuntu-latest
     name: push to docker hub
+    runs-on: ubuntu-latest
     steps:
-      - name: testing
-      - run: echo "publishing"
+      - name: build docker
+      - run: docker build --target producation --tag ${{ $GITHUB_SHA}} .
     needs: build
