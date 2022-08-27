@@ -25,7 +25,7 @@ FROM base as production
 COPY docker-entrypoint-prod.sh /app
 
 ENTRYPOINT ["./docker-entrypoint-prod.sh"]
-RUN chmod +x docker-entrypoint-testing.sh
+RUN chmod +x docker-entrypoint-prod.sh
 
 FROM base as testing
 EXPOSE 5002
