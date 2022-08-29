@@ -34,10 +34,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_ACCESS_USER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          target: production
-          tags: user/todo-app:prod-${{ github.sha }}
+      - name: build docker
+        run: docker build --target production --tag ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-${{ github.sha }} .
+      - name: Push to docker hub
+        run: docker push ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-${{ github.sha }}
     needs: build
