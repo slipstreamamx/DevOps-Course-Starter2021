@@ -20,7 +20,9 @@ jobs:
       - name: Checkout files 
         uses: actions/checkout@v2
       - name: Build docker
-        run: docker compose up testing --exit-code-from testing 
+        run: docker build --target testing --tag todo-app:testing .
+      - name: Run tests
+        run: docker run --env-file ./.env.test todo-app:testing
 
   publish:
     if: (github.event_name == 'push' && github.ref == 'refs/heads/exercise-8')
