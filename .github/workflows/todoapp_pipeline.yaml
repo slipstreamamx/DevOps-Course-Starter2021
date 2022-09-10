@@ -39,5 +39,5 @@ jobs:
       - name: build docker
         run: docker build --target production --tag todo-app:prod-${{ github.sha }} .
       - name: Push to docker hub  
-        run: docker push $username/todo-app:prod-${{ github.sha }}
+        run: docker push slipsreamamx/todo-app:prod-${{ github.sha }}
     needs: build
