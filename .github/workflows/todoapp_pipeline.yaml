@@ -37,7 +37,7 @@ jobs:
       - name: Checkout files 
         uses: actions/checkout@v2
       - name: build docker
-        run: docker build --target production --tag /todo-app:prod-${{ github.sha }} .
+        run: docker build --target production --tag todo-app:prod-${{ github.sha }} .
       - name: Push to docker hub  
         run: docker push $DOCKER_HUB_USER/todo-app:prod-${{ github.sha }}
     needs: build
