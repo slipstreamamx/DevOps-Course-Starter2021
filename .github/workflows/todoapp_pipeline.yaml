@@ -25,6 +25,9 @@ jobs:
         run: docker run --env-file ./.env.test todo-app:testing
 
   publish:
+    env:
+      DOCKER_HUB_USER_NAME: ${{ secrets.DOCKER_HUB_ACCESS_USER }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     if: (github.event_name == 'push' && github.ref == 'refs/heads/exercise-8')
     name: push to docker hub  
     runs-on: ubuntu-latest
@@ -32,12 +35,12 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_ACCESS_USER }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: $DOCKER_HUB_USER_NAME
+          password: $DOCKER_HUB_TOKEN
       - name: Checkout files 
         uses: actions/checkout@v2
       - name: build docker
         run: docker build --target production --tag todo-app:prod-${{ github.sha }} .
       - name: Push to docker hub  
-        run: docker push $slipsreamamx/todo-app:prod-${{ github.sha }}
+        run: docker push $DOCKER_HUB_USER_NAME/todo-app:prod-${{ github.sha }}
     needs: build
