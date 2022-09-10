@@ -34,8 +34,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_ACCESS_USER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Checkout files 
+        uses: actions/checkout@v2
       - name: build docker
         run: docker build --target production --tag /todo-app:prod-${{ github.sha }} .
-      - name: Push to docker hub
+      - name: Push to docker hub  
         run: docker push $DOCKER_HUB_USER/todo-app:prod-${{ github.sha }}
     needs: build
