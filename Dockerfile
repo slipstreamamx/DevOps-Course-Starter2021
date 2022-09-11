@@ -7,7 +7,7 @@ WORKDIR /app
 COPY poetry.lock pyproject.toml /app/
 RUN chmod a+x /app/pyproject.toml
 
-RUN pip3 install poetry
+RUN poetry config virtualenvs.create false --local && poetry install
 
 EXPOSE 5001
 
