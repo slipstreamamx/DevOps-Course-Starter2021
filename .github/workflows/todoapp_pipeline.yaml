@@ -25,7 +25,7 @@ jobs:
         run: docker run --env-file ./.env.test todo-app:testing
 
   publish:
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/exercise-9')
     name: push to docker hub  
     runs-on: ubuntu-latest  
     steps:
@@ -37,28 +37,8 @@ jobs:
       - name: Checkout files 
         uses: actions/checkout@v2
       - name: build docker
-        run: docker build --target production --tag ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-${{ github.sha }} .
+        run: docker build --target production --tag ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-latest .
       - name: Push to docker hub  
-        run: docker push ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-${{ github.sha }}
-      - name: Heroku login credentials
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login ${{ secrets.HEROKU_EMAIL }}
-              password ${{ secrets.HEROKU_API_KEY }}
-            machine git.heroku.com
-              login ${{ secrets.HEROKU_EMAIL }}
-              password ${{ secrets.HEROKU_API_KEY }}
-          EOF
-      - name: Add Heroku remote
-        run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
-      - name: Login into Heroku's registry
-        run: heroku container:login
-      - name: Tag for heroku
-        run: docker tag ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-${{ github.sha }} registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
-      - name: Push to heroku
-        run: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
-      - name: Release heroku
-        run: heroku container:release web
+        run: docker push ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-latest
     needs: build
 
