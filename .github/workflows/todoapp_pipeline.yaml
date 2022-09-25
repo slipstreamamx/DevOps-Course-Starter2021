@@ -41,6 +41,6 @@ jobs:
       - name: Push to docker hub  
         run: docker push ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-latest
       - name: Azure restart and pull the latest version of docker container
-        run: curl -dH -X POST 'https://\$bearsxapp:$AZURE_PASSWORDbearsxapp.scm.azurewebsites.net/api/registry/webhook' --fail
+        run: curl -dH -X POST 'https://\$bearsxapp:$AZURE_PASSWORD@bearsxapp.scm.azurewebsites.net/api/registry/webhook' --fail
     needs: build
 
