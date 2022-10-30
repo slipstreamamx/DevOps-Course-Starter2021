@@ -45,6 +45,7 @@ def add_item(name, desc, due):
         "name": name,
         "desc": desc,
         "due": due,
+        "dateLastActivity": datetime.datetime.utcnow(),
         "list": "Not Started"
     }
     cards.insert_one(card)
