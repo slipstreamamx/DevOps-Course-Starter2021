@@ -11,7 +11,7 @@ class Item:
         self.status = status
 
     @classmethod
-    def fromTrelloCard(cls, card, list):
+    def fromCard(cls, card):
         due_string = ''
         if card['due'] is not None:
             # format here should match the Trello datetimes
@@ -22,13 +22,13 @@ class Item:
             due_string = str(due_datetime.date())
       
         return cls(
-            card['id'],
+            card['_id'],
             card['idShort'], 
             card['name'], 
             card['desc'], 
             due_string,
             datetime.strptime(card['dateLastActivity'], '%Y-%m-%dT%H:%M:%S.%fZ'),
-            list['name']
+            card['list']
             )
     
     def modified_today(self):
