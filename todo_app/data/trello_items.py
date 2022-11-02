@@ -1,8 +1,8 @@
 from todo_app.data.todo_items import Item
+from datetime import date, datetime
 import os
 import pymongo
 from bson.objectid import ObjectId
-import datetime
 
 def get_connection():
     client = pymongo.MongoClient(os.getenv("COSMOS_CONNECTION_STRING"))
@@ -32,9 +32,9 @@ def get_items():
         allCards.append(Item.fromCard(card))
     return allCards
 
-def get_item(card_id):
+def get_item(id):
     cards = get_card_collection()
-    return cards.find({"_id": ObjectId(card_id)})
+    return cards.find({"_id": ObjectId(id)})
 
 def add_item(name, desc, due):
     """
@@ -45,41 +45,41 @@ def add_item(name, desc, due):
         "name": name,
         "desc": desc,
         "due": due,
-        "dateLastActivity": datetime.datetime.utcnow(),
+        "last_modified": datetime.now(),
         "list": "Not Started"
     }
     cards.insert_one(card)
     return Item.fromCard(card)
 
 
-def move_card_to_list(card_id, list):
+def move_card_to_list(id, list):
     """
     This function moves a card to a list and takes the card id and list id as parameter from functions item_in_progress, item_completed & reset_item_status.
     """
     cards = get_card_collection()
-    response = cards.update_one({'_id':ObjectId(card_id)}, {'$set':{'list':list, 'dateLastActivity': datetime.datetime.utcnow()}})
+    response = cards.update_one({'_id': ObjectId(id)}, {'$set': {'list': list, 'last_modified': datetime.now()}})
     return response
 
 
-def item_in_progress(card_id):
+def item_in_progress(id):
     """
     This function gets the card id when the user wants to progress a item and calls the move_card_to_list function. 
     """
-    card = move_card_to_list(card_id, 'In Progress') 
+    card = move_card_to_list(id, 'In Progress') 
     return card
 
-def item_completed(card_id):
+def item_completed(id):
     """
     This function gets the card id when the user completes a item and calls the move_card_to_list function. . 
     """
-    card = move_card_to_list(card_id, 'Completed')
+    card = move_card_to_list(id, 'Completed')
     return card
 
-def reset_item_status(card_id):
+def reset_item_status(id):
     """
     This function gets the card id when the user wants to set the item to not started and calls the move_card_to_list function. . 
     """
-    card = move_card_to_list(card_id,'Not Started')
+    card = move_card_to_list(id,'Not Started')
     return card
 
 

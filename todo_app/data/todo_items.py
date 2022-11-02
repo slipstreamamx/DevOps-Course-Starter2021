@@ -16,7 +16,8 @@ class Item:
             card['name'], 
             card['desc'], 
             card['due'],
-            card['list']
+            card['last_modified'],
+            card['list'],
             )
     
     def modified_today(self):

@@ -10,8 +10,8 @@ def create_app():
 
     @app.route('/')
     def index():
-        items = get_items()
-        item_view_model = ViewModel(items)
+        allCards = get_items()
+        item_view_model = ViewModel(allCards)
         return render_template('index.html', view_model=item_view_model)
 
     @app.route('/items/new', methods=['POST'])
