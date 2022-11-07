@@ -21,8 +21,7 @@ class Item:
             )
     
     def modified_today(self):
-        today = date.today()
-        return self.last_modified.date() == today.strftime("%Y-%m-%d")
+        return self.last_modified.date() == date.today()
     
     def __repr__(self):
         return f"id: {self.id}, name: {self.name}, desc: {self.desc}, due: {self.due}, status: {self.status}, last_modified: {self.last_modified}"
