@@ -83,16 +83,18 @@ def item_in_progress(id):
 
 def item_completed(id):
     """
-    Updates an existing card in the session. If no existing card matches the ID of the specified card, nothing is saved.
+    Moves the item with the specified ID to the "Completed" list.
     Args:
-        card: The card to save.
+        id (str): The ID of the card.
+    Returns:
+        card: The saved card, or None if no cards match the specified ID.
     """
     card = move_card_to_list(id, 'Completed')
     return card
 
 def reset_item_status(id):
     """
-    Moves the item with the specified ID to the "In Progress" list.
+    Moves the item with the specified ID to the "Not Started" list.
     Args:
         id (str): The ID of the card.
     Returns:
