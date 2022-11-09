@@ -30,9 +30,16 @@ def test_index_page(client):
     assert 'Task 2' in response.data.decode()
 
 
-def test_add_item(monkeypatch, client):
-    monkeypatch.setattr(requests, 'get', stub)
-    monkeypatch.setattr(requests, 'post', stub)
+def test_add_item(client):
+    collection = pymongo.MongoClient(os.getenv("COSMOS_CONNECTION_STRING"))
+    database = os.getenv("DATABASE")
+
+    collection[database].cards.insert_many(sample_card_lists_response)
+
+    response = client.get('/')
+
+    collection[database].cards.insert_one(create_card)
+        
     response = client.post('/items/new', data=form_data)
 
     assert response.status_code == 302
@@ -65,9 +72,9 @@ sample_card_lists_response = [
 }
 ]
 
-form_data = {'name': 'Create a Task', 'desc text': 'Another Task', 'date': '2022-05-28T15:48:26.091Z'}
+form_data = {'name': 'Create a Task', 'desc text': 'Another Task', 'date': '2022-05-28'}
 
-create_trello_card = {
+create_card = {
     "_id": "446278348df33aa5804e3f95",
     "name": "Create a Task",
     "desc": "Another Task",
