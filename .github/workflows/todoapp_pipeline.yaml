@@ -37,9 +37,9 @@ jobs:
       - name: Checkout files 
         uses: actions/checkout@v2
       - name: build docker
-        run: docker build --target production --tag ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:latest .
+        run: docker build --target production --tag ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-latest .
       - name: Push to docker hub  
-        run: docker push ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:latest
+        run: docker push ${{ secrets.DOCKER_HUB_ACCESS_USER }}/todo-app:prod-latest
       - name: Azure restart and pull the latest version of docker container
         run: curl -dH -X POST ${{ secrets.WEBHOOK_URL }} --fail
     needs: build
