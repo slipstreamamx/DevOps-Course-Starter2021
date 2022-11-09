@@ -57,6 +57,7 @@ def test_recent_items_shows_only_items_last_modified_today():
         Item(2, 'Task 2', 'Task 2 completed', datetime.now(), datetime(2022, 4, 18), 'Completed'),
         Item(4, 'Task 4', 'Task 4 Completed', datetime.now(), datetime(2022, 4, 18), 'Completed'),
         Item(5, 'Task 5', 'Task 5 not in progress', datetime.now(), datetime(2022, 4, 18), 'In Progress'),
+        Item(6, 'Task 6', 'Task 6 not started', datetime.now(), datetime(2022, 4, 18), 'Not Started'),
     ]
 
     view_model = ViewModel(items)
