@@ -21,9 +21,9 @@ def get_card_collection():
 
 def get_items():
     """
-    Fetches all saved items from the trello app for the specified board.
+    Fetches all cards.
     Returns:
-        items(cards) and their list(action, Not started, in progress and completed)
+        list: The list of cards.
     """
     cards = get_card_collection()
 
@@ -38,7 +38,11 @@ def get_item(id):
 
 def add_item(name, desc, due):
     """
-    This function new task (name) as its parameter provided when the user submits new task. It reterives list 'not started' ID from get_list() function.
+    Adds a new card with the specified name.
+    Args:
+        name: The name of the card.
+        desc: The description of the card
+        due: due date of the card
     """
     cards = get_card_collection()
     card = {
@@ -54,7 +58,12 @@ def add_item(name, desc, due):
 
 def move_card_to_list(id, list):
     """
-    This function moves a card to a list and takes the card id and list id as parameter from functions item_in_progress, item_completed & reset_item_status.
+    Runs a put request to update the card list
+    Args:
+        id: The ID of the card to be updated
+        list: The list object to use for the new list
+    Returns: 
+        card: The updated card, in the new specified list
     """
     cards = get_card_collection()
     response = cards.update_one({'_id': ObjectId(id)}, {'$set': {'list': list, 'last_modified': datetime.now()}})
@@ -63,21 +72,31 @@ def move_card_to_list(id, list):
 
 def item_in_progress(id):
     """
-    This function gets the card id when the user wants to progress a item and calls the move_card_to_list function. 
+    Moves the card with the specified ID to the "In Progress" list.
+    Args:
+        id (str): The ID of the card.
+    Returns:
+        card: The saved card, or None if no cards match the specified ID.
     """
     card = move_card_to_list(id, 'In Progress') 
     return card
 
 def item_completed(id):
     """
-    This function gets the card id when the user completes a item and calls the move_card_to_list function. . 
+    Updates an existing card in the session. If no existing card matches the ID of the specified card, nothing is saved.
+    Args:
+        card: The card to save.
     """
     card = move_card_to_list(id, 'Completed')
     return card
 
 def reset_item_status(id):
     """
-    This function gets the card id when the user wants to set the item to not started and calls the move_card_to_list function. . 
+    Moves the item with the specified ID to the "In Progress" list.
+    Args:
+        id (str): The ID of the card.
+    Returns:
+        card: The saved card, or None if no cards match the specified ID.
     """
     card = move_card_to_list(id,'Not Started')
     return card
