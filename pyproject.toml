@@ -13,6 +13,7 @@ gunicorn = "^20.1.0"
 MarkupSafe = "2.0.1"
 pymongo = "^4.3.2"
 mongomock = "^4.1.2"
+Flask-Login = "^0.6.2"
 
 [tool.poetry.dev-dependencies]
 freezegun = "^1.2.1"

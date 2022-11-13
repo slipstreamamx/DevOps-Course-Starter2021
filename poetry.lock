@@ -91,6 +91,18 @@ docs = ["sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet", "sphinx-
 dotenv = ["python-dotenv"]
 
 [[package]]
+name = "flask-login"
+version = "0.6.2"
+description = "User authentication and session management for Flask."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Flask = ">=1.0.4"
+Werkzeug = ">=1.0.1"
+
+[[package]]
 name = "freezegun"
 version = "1.2.1"
 description = "Let your Python tests travel through time"
@@ -388,7 +400,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "18871d7d295b96a40eb2d021b41cb57e7b4bdbf0acd79759ae79e91ccb96ed3c"
+content-hash = "ca3b60bb47b2dad71f4b6f4768913fadbcc0aa23910c4862b3ffbcbfc20fed6b"
 
 [metadata.files]
 atomicwrites = [
@@ -420,6 +432,7 @@ flask = [
     {file = "Flask-1.1.4-py2.py3-none-any.whl", hash = "sha256:c34f04500f2cbbea882b1acb02002ad6fe6b7ffa64a6164577995657f50aed22"},
     {file = "Flask-1.1.4.tar.gz", hash = "sha256:0fbeb6180d383a9186d0d6ed954e0042ad9f18e0e8de088b2b419d526927d196"},
 ]
+flask-login = []
 freezegun = [
     {file = "freezegun-1.2.1-py3-none-any.whl", hash = "sha256:15103a67dfa868ad809a8f508146e396be2995172d25f927e48ce51c0bf5cb09"},
     {file = "freezegun-1.2.1.tar.gz", hash = "sha256:b4c64efb275e6bc68dc6e771b17ffe0ff0f90b81a2a5189043550b6519926ba4"},
