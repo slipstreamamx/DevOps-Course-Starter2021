@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_login import LoginManager, login_required
-import os
+from flask_login import LoginManager, login_required, login_user, UserMixin
 from todo_app.data.trello_items import get_items, add_item, item_in_progress, item_completed, reset_item_status
+from todo_app.data.user_login import get_user_identity_endpoint, get_user_data_endpoint, get_access_token_endpoint
 
 from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
 
 def create_app():
     app = Flask(__name__)
@@ -14,15 +18,26 @@ def create_app():
 
     @login_manager.unauthorized_handler
     def unauthenticated():
-        return redirect('https://github.com/login/oauth/authorize?client_id=' + (os.getenv("CLIENT_ID")) + '&state=' + (os.getenv("STATE")))
+        return redirect(get_user_identity_endpoint())
+        
 
     @login_manager.user_loader
     def load_user(user_id):
-        pass # We will return to this later
-        return User.get(user_id)
+        return User(user_id)
 
     login_manager.init_app(app)
 
+    @app.route('/login/callback', methods=['GET'])
+    def login_callback():
+        args = request.args
+        request_token = args.get('code')
+        access_token = get_access_token_endpoint(request_token)
+
+        user_data = get_user_data_endpoint(access_token)
+
+        login_user(User(user_data['id']))
+
+        return redirect(url_for('index'))
 
     @app.route('/')
     @login_required
