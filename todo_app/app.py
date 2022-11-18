@@ -2,9 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_required, login_user, UserMixin
 from todo_app.data.trello_items import get_items, add_item, item_in_progress, item_completed, reset_item_status
 from todo_app.data.user_login import get_user_identity_endpoint, get_user_data_endpoint, get_access_token_endpoint
+import os
 
 from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
+
+app.config['LOGIN_DISABLED'] = os.getenv('LOGIN_DISABLED') == 'True'
 
 class User(UserMixin):
     def __init__(self, id):
