@@ -1,17 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_login import LoginManager, login_required, login_user, UserMixin
+from flask_login import LoginManager, login_required, login_user, UserMixin, current_user
 from todo_app.data.trello_items import get_items, add_item, item_in_progress, item_completed, reset_item_status
 from todo_app.data.user_login import get_user_identity_endpoint, get_user_data_endpoint, get_access_token_endpoint
 import os
-
 from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
-
-app.config['LOGIN_DISABLED'] = os.getenv('LOGIN_DISABLED') == 'True'
 
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
+    
+    @property
+    def user_role(self):
+        print(id)
+        if self.id == "34609286":
+            return "writer"
+        else:
+            return "reader"
 
 def create_app():
     app = Flask(__name__)
@@ -52,27 +57,44 @@ def create_app():
     @app.route('/items/new', methods=['POST'])
     @login_required
     def add_new_item():
+
+        if current_user.user_role != "writer":
+            return "Forbidden", 403
+            
         name = request.form['name']
         desc = request.form["desc text"]
         due = request.form["date"]
         add_item(name, desc, due)
+
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/in_progress')
     @login_required
     def set_item_to_progress(item_id):
+
+        if current_user.user_role != "writer":
+            return "Forbidden", 403
+
         item_in_progress(item_id)
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/complete')
     @login_required    
     def set_item_to_complete(item_id):
+
+        if current_user.user_role != "writer":
+            return "Forbidden", 403
+
         item_completed(item_id)
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/reset')
     @login_required 
-    def set_item_status(item_id):    
+    def set_item_status(item_id):
+        
+        if current_user.user_role != "writer":
+            return "Forbidden", 403
+
         reset_item_status(item_id)
         return redirect(url_for('index'))
     

@@ -14,9 +14,9 @@ def get_user_identity_endpoint():
 
     return url
 
-def get_access_token_endpoint(request_token: str) -> str:
+def get_access_token_endpoint(request_token):
 
-    url = build_url('/access_token?' + 'client_id=' + os.getenv("CLIENT_ID") + '&client_secret=' + os.getenv("CLIENT_SECRET") + '&code=' + {request_token})
+    url = build_url('/access_token?' + 'client_id=' + os.getenv("CLIENT_ID") + '&client_secret=' + os.getenv("CLIENT_SECRET") + '&code=' + str(request_token))
 
     headers = {
 
