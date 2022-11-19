@@ -12,7 +12,6 @@ class User(UserMixin):
     
     @property
     def user_role(self):
-        print(id)
         if self.id == "34609286":
             return "writer"
         else:
