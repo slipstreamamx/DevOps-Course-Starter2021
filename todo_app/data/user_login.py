@@ -10,13 +10,13 @@ def build_url(endpoint):
 
 def get_user_identity_endpoint():
     
-    url = build_url('/authorize?' + 'client_id=' + os.getenv("CLIENT_ID") + '&state=' + os.getenv("STATE"))
+    url = build_url('/authorize?' + 'client_id=' + str(os.getenv("CLIENT_ID")) + '&state=' + str(os.getenv("STATE")))
 
     return url
 
 def get_access_token_endpoint(request_token):
 
-    url = build_url('/access_token?' + 'client_id=' + os.getenv("CLIENT_ID") + '&client_secret=' + os.getenv("CLIENT_SECRET") + '&code=' + str(request_token))
+    url = build_url('/access_token?' + 'client_id=' + str(os.getenv("CLIENT_ID")) + '&client_secret=' + str(os.getenv("CLIENT_SECRET")) + '&code=' + str(request_token))
 
     headers = {
 
