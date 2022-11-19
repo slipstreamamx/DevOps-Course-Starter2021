@@ -5,7 +5,7 @@ import os
 state = os.getenv("STATE")
 
 def build_url(endpoint):
-    return os.getenv("GET_USER_IDENTITY_URL") + endpoint
+    return str(os.getenv("GET_USER_IDENTITY_URL")) + endpoint
 
 
 def get_user_identity_endpoint():
