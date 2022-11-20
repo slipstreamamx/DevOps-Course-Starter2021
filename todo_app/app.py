@@ -6,6 +6,8 @@ import os
 from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
 
+
+
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
@@ -21,6 +23,8 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())  
 
+    app.config['LOGIN_DISABLED'] = os.getenv('LOGIN_DISABLED') == 'True'
+    
     login_manager = LoginManager()
 
     @login_manager.unauthorized_handler
@@ -56,10 +60,6 @@ def create_app():
     @app.route('/items/new', methods=['POST'])
     @login_required
     def add_new_item():
-
-        if current_user.user_role != "writer":
-            return "Forbidden", 403
-            
         name = request.form['name']
         desc = request.form["desc text"]
         due = request.form["date"]
@@ -70,30 +70,18 @@ def create_app():
     @app.route('/items/<item_id>/in_progress')
     @login_required
     def set_item_to_progress(item_id):
-
-        if current_user.user_role != "writer":
-            return "Forbidden", 403
-
         item_in_progress(item_id)
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/complete')
     @login_required    
     def set_item_to_complete(item_id):
-
-        if current_user.user_role != "writer":
-            return "Forbidden", 403
-
         item_completed(item_id)
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/reset')
     @login_required 
     def set_item_status(item_id):
-        
-        if current_user.user_role != "writer":
-            return "Forbidden", 403
-
         reset_item_status(item_id)
         return redirect(url_for('index'))
     
