@@ -1,5 +1,6 @@
 import requests
 import os
+import string, random
 
 
 state = os.getenv("STATE")
@@ -10,7 +11,9 @@ def build_url(endpoint):
 
 def get_user_identity_endpoint():
     
-    url = build_url('/authorize?' + 'client_id=' + str(os.getenv("CLIENT_ID")) + '&state=' + str(os.getenv("STATE")))
+    state_string  = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+
+    url = build_url('/authorize?' + 'client_id=' + str(os.getenv("CLIENT_ID")) + '&state=' + str(state_string))
 
     return url
 
