@@ -5,8 +5,17 @@ from todo_app.data.user_login import get_user_identity_endpoint, get_user_data_e
 import os
 from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
+from functools import wraps
 
+def authorised_user(func):
+    """Check if the user role has access"""
 
+    @wraps(func)
+    def auth_wrapper(*args, **kwargs):
+        if current_user.user_role != "writer":
+            return "Forbidden", 403
+        return func(*args, **kwargs)
+    return auth_wrapper
 
 class User(UserMixin):
     def __init__(self, id):
@@ -24,7 +33,7 @@ def create_app():
     app.config.from_object(Config())  
 
     app.config['LOGIN_DISABLED'] = os.getenv('LOGIN_DISABLED') == 'True'
-    
+
     login_manager = LoginManager()
 
     @login_manager.unauthorized_handler

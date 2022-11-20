@@ -19,6 +19,11 @@ def get_user_identity_endpoint():
 
 def get_access_token_endpoint(request_token):
 
+    if not request_token:
+        raise ValueError('The request token is mandatory!')
+    if not isinstance(request_token, str):
+        raise ValueError('The request token nust be a string!')
+
     url = build_url('/access_token?' + 'client_id=' + str(os.getenv("CLIENT_ID")) + '&client_secret=' + str(os.getenv("CLIENT_SECRET")) + '&code=' + str(request_token))
 
     headers = {
