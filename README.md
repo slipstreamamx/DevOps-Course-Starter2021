@@ -166,7 +166,7 @@ $ docker-compose up -d
 
 ### Register an app for GitHub - https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/
 
-#### For the homepage URL field enter the address for accessing the website locally. For the callback add a particular path to this URL, for example /login/callback. You will need both a client ID and client secret for your .env file. The client secret once generated will only be shown once, so take a note of it to avoid needing to regenerate one later
+For the homepage URL field enter the address for accessing the website locally. For the callback add a particular path to this URL, for example /login/callback. You will need both a client ID and client secret for your .env file. The client secret once generated will only be shown once, so take a note of it to avoid needing to regenerate one later
 ```
 Add the following to the env. file:
 CLIENT_ID=

@@ -2,9 +2,6 @@ import requests
 import os
 import string, random
 
-
-state = os.getenv("STATE")
-
 def build_url(endpoint):
     return str(os.getenv("GET_USER_IDENTITY_URL")) + endpoint
 
