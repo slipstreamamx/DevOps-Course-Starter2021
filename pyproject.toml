@@ -11,6 +11,8 @@ python-dotenv = "^0.14.0"
 requests = "^2.27.1"
 gunicorn = "^20.1.0"
 MarkupSafe = "2.0.1"
+pymongo = "^4.3.2"
+mongomock = "^4.1.2"
 
 [tool.poetry.dev-dependencies]
 freezegun = "^1.2.1"
