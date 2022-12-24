@@ -37,8 +37,6 @@ def test_add_item(client):
     collection[database].cards.insert_many(sample_card_lists_response)
 
     response = client.get('/')
-
-    collection[database].cards.insert_one(create_card)
         
     response = client.post('/items/new', data=form_data)
 
