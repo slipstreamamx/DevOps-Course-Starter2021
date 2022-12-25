@@ -5,8 +5,7 @@ import pymongo
 from bson.objectid import ObjectId
 
 def get_connection():
-    client = pymongo.MongoClient(os.getenv("COSMOS_CONNECTION_STRING"))
-    endpoint = client
+    endpoint = pymongo.MongoClient(os.getenv("COSMOS_CONNECTION_STRING"))
     return endpoint
 
 def get_database():

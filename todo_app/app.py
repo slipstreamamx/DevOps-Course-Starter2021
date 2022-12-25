@@ -1,13 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_login import LoginManager, login_required, login_user, UserMixin, current_user
 from todo_app.data.trello_items import get_items, add_item, item_in_progress, item_completed, reset_item_status
-from todo_app.data.user_login import get_user_identity_endpoint, get_user_data_endpoint, get_access_token_endpoint
+from todo_app.data.user_login import UserAccess
 import os
 from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
 from functools import wraps
+import string, random
 
-def authorised_user(func):
+def user_authorised(func):
     """Check if the user role has access"""
 
     @wraps(func)
@@ -32,13 +33,14 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())  
 
-    app.config['LOGIN_DISABLED'] = os.getenv('LOGIN_DISABLED') == 'True'
-
     login_manager = LoginManager()
 
     @login_manager.unauthorized_handler
     def unauthenticated():
-        return redirect(get_user_identity_endpoint())
+        state_string  = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+        session['user-state'] = state_string
+        app.logger.info("User is unauthenticated")
+        return redirect('https://github.com/login/oauth/authorize?client_id=' + os.getenv['CLIENT_ID'] + '&state=' + state_string)
         
 
     @login_manager.user_loader
@@ -50,22 +52,25 @@ def create_app():
     @app.route('/login/callback', methods=['GET'])
     def login_callback():
         args = request.args
+        returedState = args.get('state')
+        sessionState = session.get('user-state')        
         request_token = args.get('code')
-        access_token = get_access_token_endpoint(request_token)
+        access_token = UserAccess.get_access_token(request_token)
 
-        user_data = get_user_data_endpoint(access_token)
-
-        login_user(User(user_data['id']))
+        user_data = UserAccess.get_user_data(access_token)
+        if returedState == sessionState:
+            login_user(User(user_data['id']))
 
         return redirect(url_for('index'))
 
     @app.route('/')
-    @login_required
+    @login_required 
     def index():
         allCards = get_items()
         item_view_model = ViewModel(allCards)
         return render_template('index.html', view_model=item_view_model)
 
+    @user_authorised
     @app.route('/items/new', methods=['POST'])
     @login_required
     def add_new_item():
@@ -78,18 +83,21 @@ def create_app():
 
     @app.route('/items/<item_id>/in_progress')
     @login_required
+    @user_authorised 
     def set_item_to_progress(item_id):
         item_in_progress(item_id)
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/complete')
-    @login_required    
+    @login_required
+    @user_authorised    
     def set_item_to_complete(item_id):
         item_completed(item_id)
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/reset')
-    @login_required 
+    @login_required
+    @user_authorised    
     def set_item_status(item_id):
         reset_item_status(item_id)
         return redirect(url_for('index'))
