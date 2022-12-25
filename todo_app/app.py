@@ -40,7 +40,7 @@ def create_app():
         state_string  = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
         session['user-state'] = state_string
         app.logger.info("User is unauthenticated")
-        return redirect('https://github.com/login/oauth/authorize?client_id=' + os.getenv['CLIENT_ID'] + '&state=' + state_string)
+        return redirect('https://github.com/login/oauth/authorize?client_id=' + str(os.getenv('CLIENT_ID')) + '&state=' + state_string)
         
 
     @login_manager.user_loader
