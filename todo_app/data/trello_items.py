@@ -6,7 +6,6 @@ from bson.objectid import ObjectId
 
 def get_connection():
     endpoint = pymongo.MongoClient(os.getenv("COSMOS_CONNECTION_STRING"))
-
     return endpoint
 
 def get_database():
