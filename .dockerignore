@@ -11,3 +11,16 @@ bears-inventory.INI
 todoapp.service
 .gitignore
 README.md
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*tfplan*
+
+# Crash log files
+crash.log
+crash.*.log
