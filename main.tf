@@ -103,7 +103,6 @@ resource "azurerm_cosmosdb_account" "main" {
     max_interval_in_seconds = 5
     max_staleness_prefix    = 100
   }
-  offer_type = "Standard"
 
 }
 
