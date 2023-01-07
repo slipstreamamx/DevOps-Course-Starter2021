@@ -29,6 +29,8 @@ jobs:
       DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_ACCESS_USER }}
       TF_VAR_client_id: ${{ secrets.TF_VAR_CLIENT_ID }}
       TF_VAR_client_secret: ${{ secrets.TF_VAR_CLIENT_SECRET }}
+      TF_VAR_FLASK_APP: ${{ secrets.FLASK_APP }}
+      TF_VAR_FLASK_ENV: ${{ secrets.FLASK_ENV }}
       TF_VAR_SECRET_KEY : ${{ secrets.TF_VAR_SECRET_KEY }}
       TF_VAR_azure_client_secret: ${{ secrets.TF_VAR_ARM_CLIENT_SECRET }}
       TF_VAR_azure_client_id: ${{ secrets.TF_VAR_ARM_CLIENT_ID }}
@@ -37,7 +39,7 @@ jobs:
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}  
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
     if: (github.event_name == 'push' && github.ref == 'refs/heads/exercise-12')
     name: push to docker hub  
     runs-on: ubuntu-latest  

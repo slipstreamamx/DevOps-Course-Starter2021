@@ -31,5 +31,12 @@ variable "azure_subscription_id" {
 
 variable "azure_tenant_id" {
   description = "The tenant ID for the azure provider"
+}
 
+variable "FLASK_APP" {
+  description = "Flask server configurationr"
+}
+
+variable "FLASK_ENV" {
+  description = "Flask server configuration"
 }

@@ -29,14 +29,6 @@ data "azurerm_resource_group" "main" {
 
 }
 
-resource "random_string" "resource_code" {
-    length  = 5
-    special = false
-    upper   = false
-
-}
-
-
 resource "azurerm_service_plan" "main" {
     name = "bears-app-service-plan-tr" 
     location = data.azurerm_resource_group.main.location 
@@ -63,9 +55,10 @@ resource "azurerm_linux_web_app" "main" {
     "CLIENT_SECRET" = var.client_secret
     "DATABASE" = azurerm_cosmosdb_mongo_database.main.name
     "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
-    "DOCKER_ENABLE_CI" = true
     "MONGODB_CONNECTION_STRING" = azurerm_cosmosdb_account.main.connection_strings[0]
     "SECRET_KEY" = var.SECRET_KEY
+    "FLASK_APP" = var.FLASK_APP
+    "FLASK_ENV" = var.FLASK_ENV
     }
 }
 
@@ -96,9 +89,21 @@ resource "azurerm_cosmosdb_account" "main" {
     name = "EnableServerless"
   }
 
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  geo_location {
+    failover_priority = 0
+    location          = "uksouth"
+    zone_redundant    = false
+  }
+  consistency_policy {
+    consistency_level       = "Session"
+    max_interval_in_seconds = 5
+    max_staleness_prefix    = 100
+  }
+  offer_type = "Standard"
 
 }
 
@@ -106,4 +111,8 @@ resource "azurerm_cosmosdb_mongo_database" "main" {
   name                = "bearxapp-database-tr"
   resource_group_name = azurerm_cosmosdb_account.main.resource_group_name
   account_name        = azurerm_cosmosdb_account.main.name
+  
+  lifecycle {
+    prevent_destroy = false
+  }  
 }
