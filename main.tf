@@ -98,12 +98,6 @@ resource "azurerm_cosmosdb_account" "main" {
     location          = "uksouth"
     zone_redundant    = false
   }
-  consistency_policy {
-    consistency_level       = "Session"
-    max_interval_in_seconds = 5
-    max_staleness_prefix    = 100
-  }
-
 }
 
 resource "azurerm_cosmosdb_mongo_database" "main" {
