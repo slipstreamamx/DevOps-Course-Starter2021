@@ -10,7 +10,7 @@ variable "client_secret" {
     sensitive = true
 }
 
-variable "secret_key" {
+variable "SECRET_KEY" {
     type = string
     description = "The secret key value"
     sensitive = true

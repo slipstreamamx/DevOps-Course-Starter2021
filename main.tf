@@ -65,7 +65,7 @@ resource "azurerm_linux_web_app" "main" {
     "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
     "DOCKER_ENABLE_CI" = true
     "MONGODB_CONNECTION_STRING" = azurerm_cosmosdb_account.main.connection_strings[0]
-    "SECRET_KEY" = var.secret_key
+    "SECRET_KEY" = var.SECRET_KEY
     }
 }
 
