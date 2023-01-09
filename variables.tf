@@ -1,42 +1,52 @@
 variable "client_id" {
     type = string
-    description = "The oAuth client ID value for connection"
+    description = "github client id"
     sensitive = true
 }
 
 variable "client_secret" {
     type = string
-    description = "The oAuth client secret value for connection"
+    description = "github client secret"
     sensitive = true
 }
 
 variable "SECRET_KEY" {
     type = string
-    description = "The secret key value"
+    description = "Flask Secret Key""
     sensitive = true
 }
 
 variable "azure_client_secret" {
-  description = "The client secret value for azure connection"
+  description = "Azure service principal secret"
   sensitive = true
 }
 
 variable "azure_client_id" {
-  description = "The client ID for the azure provider"
+  description = "Azure service principal id"
+  sensitive   = true
 }
 
 variable "azure_subscription_id" {
   description = "The subscription ID for the azure provider"
+  sensitive   = true
 }
 
 variable "azure_tenant_id" {
-  description = "The tenant ID for the azure provider"
+  description = "Azure tenant id"
+  sensitive   = true
 }
 
 variable "FLASK_APP" {
-  description = "Flask server configurationr"
+  description = "Flask app path"
+  sensitive   = true
 }
 
 variable "FLASK_ENV" {
+  description = "Flask environment file to use"
+  sensitive   = true
+}
+
+variable "WEBSITES_PORT" {
   description = "Flask server configuration"
+  sensitive   = true
 }
