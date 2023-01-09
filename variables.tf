@@ -12,7 +12,7 @@ variable "client_secret" {
 
 variable "SECRET_KEY" {
     type = string
-    description = "Flask Secret Key""
+    description = "Flask Secret Key"
     sensitive = true
 }
 
