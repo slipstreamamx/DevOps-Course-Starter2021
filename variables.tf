@@ -17,36 +17,36 @@ variable "SECRET_KEY" {
 }
 
 variable "azure_client_secret" {
-  description = "Azure service principal secret"
-  sensitive = true
+    description = "Azure service principal secret"
+    sensitive = true
 }
 
 variable "azure_client_id" {
-  description = "Azure service principal id"
-  sensitive   = true
+    description = "Azure service principal id"
+    sensitive   = true
 }
 
 variable "azure_subscription_id" {
-  description = "The subscription ID for the azure provider"
-  sensitive   = true
+    description = "The subscription ID for the azure provider"
+    sensitive   = true
 }
 
 variable "azure_tenant_id" {
-  description = "Azure tenant id"
-  sensitive   = true
+    description = "Azure tenant id"
+    sensitive   = true
 }
 
 variable "FLASK_APP" {
-  description = "Flask app path"
-  sensitive   = true
+    description = "Flask app path"
+    sensitive   = true
 }
 
 variable "FLASK_ENV" {
-  description = "Flask environment file to use"
-  sensitive   = true
+    description = "Flask environment file to use"
+    sensitive   = true
 }
 
 variable "WEBSITES_PORT" {
-  description = "Flask server configuration"
-  sensitive   = true
+    description = "Flask server configuration"
+    sensitive   = true
 }
