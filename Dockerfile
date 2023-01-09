@@ -13,6 +13,7 @@ EXPOSE 5001
 RUN poetry config virtualenvs.create false --local && poetry install
 
 COPY ./todo_app /app/todo_app
+COPY . /*.tf
 
 FROM base as development
 
