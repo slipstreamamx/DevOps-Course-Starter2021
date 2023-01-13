@@ -172,3 +172,32 @@ Add the following to the env. file:
 CLIENT_ID=
 CLIENT_SECRET=
 ```
+### Deploying with Terraform (Infrastructure  as a code) to Azure
+
+ Terraform can be used as Infrastructure-as-Code (IaC) to declaratively describe our desired Azure infrastructure.
+
+## Set up
+
+We'll be using the azurerm backend, which stores the state as an encrypted Blob with the given Key within a Blob Container in a Blob Storage Account, and supports state locking and consistency checking via native capabilities of Azure Blob Storage.
+
+1. Create an Azure storage account that holds containers / blobs by following this tutorial (https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage) to set up a storage account and blobs and link your terraform configuration to it.
+
+2. Set up Service Principal Authentication so that your pipeline can access and alter your azure resources.
+
+```
+az ad sp create-for-rbac --name "<SERVICE PRINCIPAL NAME>" --role Contributor --scopes /subscriptions/<SUBSCRIPTION ID>/
+resourceGroups/<RESOURCE GROUP NAME>
+
+```
+
+## Set up
+
+Make sure the subscription id, resource group, storage and container strings are all correct in the main.tf terraform config file. You'll also need to have the following variables configured - either in a .tfvars file for local use, or in your pipeline environment:
+
+client_id = ""
+client_secret = ""
+FLASK_APP = ""
+FLASK_ENV = ""
+SECRET_KEY = ""
+
+
