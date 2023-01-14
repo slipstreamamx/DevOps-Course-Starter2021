@@ -213,3 +213,8 @@ We will be using loggy for application logs.
 3. Add LOGGLY_TOKEN to .env and set the value to customer token as per step 2.
 
 4. Also add LOG_LEVEL to your .env and set the value to ethier these values (DEBUG, INFO, ERROR, WARNING) to output specific logs.
+
+5. You'll also need to have the following variables configured - either in a .tfvars file for local use, or in your pipeline environment:
+
+* LOG_LEVEL = ""
+* LOGGLY_TOKEN = ""

@@ -66,6 +66,8 @@ resource "azurerm_linux_web_app" "main" {
     "SECRET_KEY" = var.SECRET_KEY
     "FLASK_APP" = var.FLASK_APP
     "FLASK_ENV" = var.FLASK_ENV
+    "LOG_LEVEL" = var.LOG_LEVEL
+    "LOGGLY_TOKEN" = var.LOGGLY_TOKEN
     "WEBSITES_PORT" = var.WEBSITES_PORT
     }
 }

@@ -50,3 +50,13 @@ variable "WEBSITES_PORT" {
     description = "Flask server configuration"
     sensitive   = true
 }
+
+variable "LOG_LEVEL" {
+    description = "log level configuration"
+    sensitive   = true
+}
+
+variable "LOGGLY_TOKEN" {
+    description = "Loggly customer token"
+    sensitive   = true
+}
