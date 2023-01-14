@@ -9,6 +9,8 @@ from functools import wraps
 import string, random
 from loggly.handlers import HTTPSHandler
 from logging import Formatter
+from pythonjsonlogger import jsonlogger
+
 
 def user_authorised(func):
     """Check if the user role has access"""
@@ -55,7 +57,7 @@ def create_app():
 
     if app.config['LOGGLY_TOKEN'] is not None:
         handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
-        handler.setFormatter(Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s"))
+        handler.setFormatter(jsonlogger.JsonFormatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s"))
         app.logger.addHandler(handler)
 
     @app.route('/login/callback', methods=['GET'])
