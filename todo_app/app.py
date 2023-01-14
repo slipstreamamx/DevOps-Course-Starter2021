@@ -7,7 +7,8 @@ from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
 from functools import wraps
 import string, random
-import logging
+from loggly.handlers import HTTPSHandler
+from logging import Formatter
 
 def user_authorised(func):
     """Check if the user role has access"""
@@ -33,6 +34,7 @@ class User(UserMixin):
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())  
+    app.logger.setLevel(app.config['LOG_LEVEL'])
 
     login_manager = LoginManager()
 
@@ -46,9 +48,15 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
+        app.logger.info(f"User is authenticated and their role is {User(user_id).user_role}, with ID of {user_id}")        
         return User(user_id)
 
     login_manager.init_app(app)
+
+    if app.config['LOGGLY_TOKEN'] is not None:
+        handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
+        handler.setFormatter(Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s"))
+        app.logger.addHandler(handler)
 
     @app.route('/login/callback', methods=['GET'])
     def login_callback():
