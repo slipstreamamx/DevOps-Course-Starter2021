@@ -200,4 +200,16 @@ Make sure the subscription id, resource group, storage and container strings are
 * FLASK_ENV = ""
 * SECRET_KEY = ""
 
+### logging with Loggly
 
+We will be using loggy for application logs. 
+
+## Sign up with Loggly
+
+1. Sign with Loggly using this url (https://www.loggly.com/)
+
+2. log in and find the icon for "Logs" in the lefthand menu. Under this, select "Source Setup". Then, on the tabs along the top of the page, select "Customer Tokens". Add a new customer token. 
+
+3. Add LOGGLY_TOKEN to .env and set the value to customer token as per step 2.
+
+4. Also add LOG_LEVEL to your .env and set the value to ethier these values (DEBUG, INFO, ERROR, WARNING) to output specific logs.
