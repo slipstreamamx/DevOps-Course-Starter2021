@@ -200,11 +200,11 @@ Make sure the subscription id, resource group, storage and container strings are
 * FLASK_ENV = ""
 * SECRET_KEY = ""
 
-### logging with Loggly
+## logging with Loggly
 
 We will be using loggy for application logs. 
 
-## Sign up with Loggly
+### Sign up with Loggly and set env variables
 
 1. Sign with Loggly using this url (https://www.loggly.com/)
 
