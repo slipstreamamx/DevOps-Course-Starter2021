@@ -46,7 +46,6 @@ variable "FLASK_ENV" {
 
 variable "WEBSITES_PORT" {
     description = "Flask server configuration"
-    sensitive   = true
 }
 
 variable "LOG_LEVEL" {
