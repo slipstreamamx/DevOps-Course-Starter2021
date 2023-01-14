@@ -10,6 +10,7 @@ import string, random
 from loggly.handlers import HTTPSHandler
 from logging import Formatter
 from pythonjsonlogger import jsonlogger
+from logging import getLogger
 
 
 def user_authorised(func):
@@ -58,6 +59,9 @@ def create_app():
     if app.config['LOGGLY_TOKEN'] is not None:
         handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
         handler.setFormatter(jsonlogger.JsonFormatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s"))
+
+        getLogger('werkzeug').addHandler(HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app-requests'))
+
         app.logger.addHandler(handler)
 
     @app.route('/login/callback', methods=['GET'])
