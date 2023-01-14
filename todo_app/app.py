@@ -7,6 +7,7 @@ from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
 from functools import wraps
 import string, random
+import logging
 
 def user_authorised(func):
     """Check if the user role has access"""
@@ -86,6 +87,7 @@ def create_app():
     @user_authorised 
     def set_item_to_progress(item_id):
         item_in_progress(item_id)
+        app.logger.info(f'Card %s {item_id} set to in progress')
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/complete')
@@ -93,6 +95,7 @@ def create_app():
     @user_authorised    
     def set_item_to_complete(item_id):
         item_completed(item_id)
+        app.logger.info(f'Card %s {item_id} is set to completed')        
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/reset')
@@ -100,6 +103,7 @@ def create_app():
     @user_authorised    
     def set_item_status(item_id):
         reset_item_status(item_id)
+        app.logger.info(f'Card %s {item_id} reset to Not Started')        
         return redirect(url_for('index'))
     
     return app
