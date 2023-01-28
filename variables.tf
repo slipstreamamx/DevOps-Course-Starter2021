@@ -38,15 +38,22 @@ variable "azure_tenant_id" {
 
 variable "FLASK_APP" {
     description = "Flask app path"
-    sensitive   = true
 }
 
 variable "FLASK_ENV" {
     description = "Flask environment file to use"
-    sensitive   = true
 }
 
 variable "WEBSITES_PORT" {
     description = "Flask server configuration"
+}
+
+variable "LOG_LEVEL" {
+    description = "log level configuration"
+}
+
+variable "LOGGLY_TOKEN" {
+    type = string
+    description = "Loggly customer token"
     sensitive   = true
 }

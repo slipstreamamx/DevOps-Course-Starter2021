@@ -176,7 +176,7 @@ CLIENT_SECRET=
 
  Terraform can be used as Infrastructure-as-Code (IaC) to declaratively describe our desired Azure infrastructure.
 
-## Set up
+## Cloud set up
 
 We'll be using the azurerm backend, which stores the state as an encrypted Blob with the given Key within a Blob Container in a Blob Storage Account, and supports state locking and consistency checking via native capabilities of Azure Blob Storage.
 
@@ -190,14 +190,31 @@ resourceGroups/<RESOURCE GROUP NAME>
 
 ```
 
-## Set up
+## Terraform set up
 
 Make sure the subscription id, resource group, storage and container strings are all correct in the main.tf terraform config file. You'll also need to have the following variables configured - either in a .tfvars file for local use, or in your pipeline environment:
 
-client_id = ""
-client_secret = ""
-FLASK_APP = ""
-FLASK_ENV = ""
-SECRET_KEY = ""
+* client_id = ""
+* client_secret = ""
+* FLASK_APP = ""
+* FLASK_ENV = ""
+* SECRET_KEY = ""
 
+## logging with Loggly
 
+We will be using loggy for application logs. 
+
+### Sign up with Loggly and set env variables
+
+1. Sign with Loggly using this url (https://www.loggly.com/)
+
+2. log in and find the icon for "Logs" in the lefthand menu. Under this, select "Source Setup". Then, on the tabs along the top of the page, select "Customer Tokens". Add a new customer token. 
+
+3. Add LOGGLY_TOKEN to .env and set the value to customer token as per step 2.
+
+4. Also add LOG_LEVEL to your .env and set the value to ethier these values (DEBUG, INFO, ERROR, WARNING) to output specific logs.
+
+5. You'll also need to have the following variables configured - either in a .tfvars file for local use, or in your pipeline environment:
+
+* LOG_LEVEL = ""
+* LOGGLY_TOKEN = ""

@@ -7,6 +7,11 @@ from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
 from functools import wraps
 import string, random
+from loggly.handlers import HTTPSHandler
+from logging import Formatter
+from pythonjsonlogger import jsonlogger
+from logging import getLogger
+
 
 def user_authorised(func):
     """Check if the user role has access"""
@@ -32,6 +37,7 @@ class User(UserMixin):
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())  
+    app.logger.setLevel(app.config['LOG_LEVEL'])
 
     login_manager = LoginManager()
 
@@ -45,9 +51,18 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
+        app.logger.info(f"User is authenticated and their role is {User(user_id).user_role}, with ID of {user_id}")        
         return User(user_id)
 
     login_manager.init_app(app)
+
+    if app.config['LOGGLY_TOKEN'] is not None:
+        handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
+        handler.setFormatter(jsonlogger.JsonFormatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s"))
+
+        getLogger('werkzeug').addHandler(HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app-requests'))
+
+        app.logger.addHandler(handler)
 
     @app.route('/login/callback', methods=['GET'])
     def login_callback():
@@ -86,6 +101,7 @@ def create_app():
     @user_authorised 
     def set_item_to_progress(item_id):
         item_in_progress(item_id)
+        app.logger.info(f'Card %s {item_id} set to in progress')
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/complete')
@@ -93,6 +109,7 @@ def create_app():
     @user_authorised    
     def set_item_to_complete(item_id):
         item_completed(item_id)
+        app.logger.info(f'Card %s {item_id} is set to completed')        
         return redirect(url_for('index'))
 
     @app.route('/items/<item_id>/reset')
@@ -100,6 +117,7 @@ def create_app():
     @user_authorised    
     def set_item_status(item_id):
         reset_item_status(item_id)
+        app.logger.info(f'Card %s {item_id} reset to Not Started')        
         return redirect(url_for('index'))
     
     return app
