@@ -118,3 +118,16 @@ env/
 
 ### Configuration files ###
 .env
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*tfplan*
+
+# Crash log files
+crash.log
+crash.*.log
