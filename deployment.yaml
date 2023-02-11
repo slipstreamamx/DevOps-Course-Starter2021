@@ -1,0 +1,60 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: module-14
+spec:
+  selector:
+    matchLabels:
+      app: module-14
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: module-14
+    spec:
+      containers:
+        - name: todo-app
+          image: todo-app:prod
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 5000
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: env-secrets
+                  key: SECRET_KEY
+                  optional: false
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: env-secrets
+                  key: CLIENT_ID
+                  optional: false
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: env-secrets
+                  key: CLIENT_SECRET
+                  optional: false
+            - name: COSMOS_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: env-secrets
+                  key: COSMOS_CONNECTION_STRING
+                  optional: false
+            - name: DATABASE
+              value: "bearxapp-database-tr"
+            - name: LOGGLY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: env-secrets
+                  key: LOGGLY_TOKEN
+                  optional: false
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: FLASK_ENV
+              value: "development"
+            - name: FLASK_APP
+              value: "todo_app/app"          
