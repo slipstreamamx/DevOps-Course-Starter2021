@@ -218,3 +218,37 @@ We will be using loggy for application logs.
 
 * LOG_LEVEL = ""
 * LOGGLY_TOKEN = ""
+
+## Set up our To-Do app on a local minikube cluster
+
+### Run in minikube
+
+1. Spinning up a minikube cluster
+```
+Run minikube start in an admin terminal to spin up your minikube cluster
+```
+2. Deploy a Pod running the docker image of the todo-app
+```
+Run kubectl apply -f deployment.yaml
+```
+3. Deploy the service to give access to the Pod
+```
+Run kubectl apply -f deployment.yaml
+```
+4. Deploy the env-secrets which stores the environment variables and secrets of your todo-app. Add the following environment variables and secrets to env-secrets.template as a yaml file:
+SECRET_KEY
+CLIENT_ID
+CLIENT_SECRET
+COSMOS_CONNECTION_STRING
+LOGGLY_TOKEN
+```
+kubectl apply -f env-secret.yaml
+```
+4. Link up our minikube Service with a port on localhost
+```
+run kubectl port-forward service/module-14 7080:80
+```
+5. Open the browser to view the todo-app
+```
+Open http://localhost:7080 in your browser
+```

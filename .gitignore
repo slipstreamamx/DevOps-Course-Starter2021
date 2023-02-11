@@ -131,3 +131,6 @@ env/
 # Crash log files
 crash.log
 crash.*.log
+
+# minikube environment secrets file
+env-secrets.yaml
